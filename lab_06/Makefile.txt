@@ -1,0 +1,22 @@
+CC = gcc
+
+CFLAGS = -std=c99 -Werror -Wall -Wextra -Wpedantic -Wcast-align -Wcast-qual -Wenum-compare -Wfloat-equal -Wredundant-decls 
+all:my_fun
+
+my_fun: main.o my_print.o from_file.o found_in_file.o
+	$(CC) main.o my_print.o from_file.o found_in_file.o -o my_fun
+
+main.o: main.c
+	$(CC) $(CFLAGS) main.c
+
+found_in_file.o: found_in_file.c
+	$(CC) $(CFLAGS) found_in_file.c
+
+from_file.o: from_file.c
+	$(CC) $(CFLAGS) from_file.c
+
+my_print.o: my_print.c
+	$(CC) $(CFLAGS) my_print.c
+
+clean:
+	rm -rf *.o my_fun
