@@ -1,13 +1,10 @@
-#include "../inc/main.h"
+#include "../inc/my_main.h"
 #include "../inc/parsing.h"
 #include "../inc/mysort.h"
 #include "../inc/key.h"
 
-int main(/*int argc, char **argv*/)
+int main(int argc, char **argv)
 {
-    int argc = 4;
-    char argv[12][122] = {"app.exe", "C:/msys64/home/Ira/cprog/lab_07/f_in.txt", "C:/msys64/home/Ira/cprog/lab_07/f_out.txt"};
-
     int rc = OK;
 
     if (argc == 3 || argc == 4)
@@ -35,11 +32,10 @@ int main(/*int argc, char **argv*/)
                     {
                         int *key_arrayb, *key_arraye;
                         int len_key = key(array, array + len_array, &key_arrayb, &key_arraye);
+                        free(array);
 
                         if (len_key > 0)
                         {
-                            free(array);
-
                             mysort(key_arrayb, len_key, sizeof(int), compare);
 
                             FILE *f_out;
@@ -53,17 +49,17 @@ int main(/*int argc, char **argv*/)
                             }
                             else
                             {
-                                printf("ERR");
+                                //printf("ERR");
                                 rc = FILE_OPEN_ERR;
                             }
                         }
                         else
                         {
-                            printf("ERR");
+                            //printf("ERR");
                             rc = ERROR_MEMORY;
                         }
                     }
-                    else
+                    else if (argc == 3)
                     {
                         mysort(array, len_array, sizeof(int), compare);
 
@@ -78,32 +74,37 @@ int main(/*int argc, char **argv*/)
                         }
                         else
                         {
-                            printf("ERR");
+                            //printf("ERR");
                             rc = FILE_OPEN_ERR;
                         }
+                    }
+                    else
+                    {
+                        //printf("ERR");
+                        rc = INVALID_ARG;
                     }
                 }
                 else
                 {
-                    printf("ERR");
+                    //printf("ERR");
                     rc = ERROR_MEMORY;
                 }
             }
             else
             {
-                printf("ERR");
+                //printf("ERR");
                 rc = FILE_EMPTY_ERR;
             }
         }
         else
         {
-            printf("ERR");
+            //printf("ERR");
             rc = FILE_OPEN_ERR;
         }
     }
     else
     {
-        printf("ERR");
+        //printf("ERR");
         rc = INVALID_ARG;
     }
 

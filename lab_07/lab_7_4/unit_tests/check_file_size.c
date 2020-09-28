@@ -2,61 +2,86 @@
 
 START_TEST(tests_file_usual)
 {
-    FILE *f = fopen("1.txt", "r");
+    FILE *f = fopen("unit_tests\\1.txt", "r");
     int rc;
 
-    rc = file_size(f);
-    ck_assert_int_eq(rc, 5);
+	if (f)
+	{
+		rc = file_size(f);
+		ck_assert_int_eq(rc, 5);
+		fclose(f);
+	}
 }
 END_TEST
 
 START_TEST(tests_file_similar)
 {
-    FILE *f = fopen("2.txt", "r");
+    FILE *f = fopen("unit_tests\\2.txt", "r");
     int rc;
 
-    rc = file_size(f);
-    ck_assert_int_eq(rc, 4);
+	if (f)
+	{
+		rc = file_size(f);
+		ck_assert_int_eq(rc, 4);
+		fclose(f);
+	}
 }
 END_TEST
 
 START_TEST(tests_file_one)
 {
-    FILE *f = fopen("3.txt", "r");
+    FILE *f = fopen("unit_tests\\3.txt", "r");
     int rc;
 
-    rc = file_size(f);
-    ck_assert_int_eq(rc, 1);
+	if (f)
+	{
+		rc = file_size(f);
+		ck_assert_int_eq(rc, 1);
+		fclose(f);
+	}
 }
 END_TEST
 
 START_TEST(tests_file_empty)
 {
-    FILE *f = fopen("4.txt", "r");
+    FILE *f = fopen("unit_tests\\4.txt", "r");
     int rc;
 
-    rc = file_size(f);
-    ck_assert_int_eq(rc, 0);
+	if (f)
+	{
+		rc = file_size(f);
+		ck_assert_int_eq(rc, 0);
+		fclose(f);
+	}
 }
 END_TEST
 
 START_TEST(tests_file_float)
 {
-    FILE *f = fopen("5.txt", "r");
+    FILE *f = fopen("unit_tests\\5.txt", "r");
     int rc;
 
-    rc = file_size(f);
-    ck_assert_int_eq(rc, 0);
+	if (f)
+	{
+		rc = file_size(f);
+		ck_assert_int_eq(rc, 0);
+		fclose(f);
+	}
+
 }
 END_TEST
 
 START_TEST(tests_file_let)
 {
-    FILE *f = fopen("6.txt", "r");
+    FILE *f = fopen("unit_tests\\6.txt", "r");
     int rc;
 
-    rc = file_size(f);
-    ck_assert_int_eq(rc, 0);
+	if (f)
+	{
+		rc = file_size(f);
+		ck_assert_int_eq(rc, 0);
+		fclose(f);
+	}
 }
 END_TEST
 

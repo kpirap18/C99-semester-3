@@ -2,7 +2,7 @@
 #define KEY_H
 
 
-#include "main.h"
+#include "my_main.h"
 
 double avarage(const int *pb, const int *pe);
 int key_count(const int *pb, const int *pe, double ava);

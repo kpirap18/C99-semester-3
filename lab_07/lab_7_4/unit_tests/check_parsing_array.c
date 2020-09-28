@@ -2,41 +2,53 @@
 
 START_TEST(tests_file_usual)
 {
-    FILE *f = fopen("1.txt", "r");
+    FILE *f = fopen("unit_tests\\1.txt", "r");
     int a[5];
     int *pa = a;
 
-    parsing_array(f, pa);
-    ck_assert_int_eq(*pa, 4);
-    ck_assert_int_eq(*(pa + 1), 7);
-    ck_assert_int_eq(*(pa + 2), -8);
-    ck_assert_int_eq(*(pa + 3), 5);
-    ck_assert_int_eq(*(pa + 4), 6);
+	if (f)
+	{
+		parsing_array(f, pa);
+		ck_assert_int_eq(*pa, 4);
+		ck_assert_int_eq(*(pa + 1), 7);
+		ck_assert_int_eq(*(pa + 2), -8);
+		ck_assert_int_eq(*(pa + 3), 5);
+		ck_assert_int_eq(*(pa + 4), 6);
+		fclose(f);
+	}
 }
 END_TEST
 
 START_TEST(tests_file_similar)
 {
-    FILE *f = fopen("2.txt", "r");
+    FILE *f = fopen("unit_tests\\2.txt", "r");
     int a[4];
     int *pa = a;
 
-    parsing_array(f, pa);
-    ck_assert_int_eq(*pa, 1);
-    ck_assert_int_eq(*(pa + 1), 1);
-    ck_assert_int_eq(*(pa + 2), 1);
-    ck_assert_int_eq(*(pa + 3), 1);
+	if (f)
+	{
+		parsing_array(f, pa);
+		ck_assert_int_eq(*pa, 1);
+		ck_assert_int_eq(*(pa + 1), 1);
+		ck_assert_int_eq(*(pa + 2), 1);
+		ck_assert_int_eq(*(pa + 3), 1);
+		fclose(f);
+	}
 }
 END_TEST
 
 START_TEST(tests_file_one)
 {
-    FILE *f = fopen("3.txt", "r");
+    FILE *f = fopen("unit_tests\\3.txt", "r");
     int a[1];
     int *pa = a;
 
-    parsing_array(f, pa);
-    ck_assert_int_eq(*pa, 8);
+	if (f)
+	{
+		parsing_array(f, pa);
+		ck_assert_int_eq(*pa, 8);
+		fclose(f);
+	}
 }
 END_TEST
 

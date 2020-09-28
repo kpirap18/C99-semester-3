@@ -35,7 +35,7 @@ START_TEST(tests_usual)
     int rc;
 
     rc = key_count(pb_src, pe_src, 4.8);
-    ck_assert_int_eq(rc, 2);
+    ck_assert_int_eq(rc, 3);
 }
 END_TEST
 
@@ -54,4 +54,5 @@ Suite* key_count_suite(void)
 
     return s;
 }
+
 

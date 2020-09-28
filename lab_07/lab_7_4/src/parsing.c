@@ -28,19 +28,18 @@ void parsing_array(FILE *f, int *pb)
         *pb = for_read;
         pb++;
     }
-
 }
 int file_size(FILE *f)
 {
     int for_read, len = 0;
 
-    while (feof(f))
+    while (!feof(f))
     {
         if (fscanf(f, "%d", &for_read) == 1)
         {
             len += 1;
         }
-        else if (feof(f))
+        else if (!feof(f))
         {
             len = 0;
             break;

@@ -5,12 +5,11 @@ START_TEST(tests_ava_usual)
     int *pb_src, *pe_src;
     int a[3] = {1, 1, 1};
     pb_src = a;
-    pe_src = a;
+    pe_src = &a[3];
     double rc;
 
     rc = avarage(pb_src, pe_src);
-    ck_assert_double_eq(rc, 1);
-    free(pb_src);
+    ck_assert_double_eq(rc, (double)3 / (double)3);
 }
 END_TEST
 
@@ -23,8 +22,7 @@ START_TEST(tests_float_res)
     double rc;
 
     rc = avarage(pb_src, pe_src);
-    ck_assert_double_eq(rc, 23 / 5);
-    free(pb_src);
+    ck_assert_double_eq(rc, (double)23 / (double)5);
 }
 END_TEST
 
@@ -37,8 +35,7 @@ START_TEST(tests_all_neg)
     double rc;
 
     rc = avarage(pb_src, pe_src);
-    ck_assert_double_eq(rc, -29 / 6);
-    free(pb_src);
+    ck_assert_double_eq(rc, (double)-29 / (double)6);
 }
 END_TEST
 
@@ -57,3 +54,4 @@ Suite* avarage_suite(void)
 
     return s;
 }
+

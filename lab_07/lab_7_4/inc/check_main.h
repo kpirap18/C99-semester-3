@@ -3,10 +3,18 @@
 
 #include <stdlib.h>
 #include <check.h>
-#include "main.h"
 #include "mysort.h"
 #include "parsing.h"
 #include "key.h"
+
+#define OK 0
+#define EPS 1e-6
+#define ERROR -1
+#define FILE_OPEN_ERR -2
+#define FILE_EMPTY_ERR -3
+#define KEYARRAY_EMRTY_ERR -4
+#define INVALID_ARG -5
+#define ERROR_MEMORY -6
 
 Suite* avarage_suite(void);
 Suite* compare_suite(void);

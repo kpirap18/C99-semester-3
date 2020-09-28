@@ -52,11 +52,13 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
         }
         else
         {
+			*pb_dst = NULL;
             rc = ERROR_MEMORY;
         }
     }
     else
     {
+		*pb_dst = NULL;
         rc = KEYARRAY_EMRTY_ERR;
     }
 

@@ -17,10 +17,9 @@ void swap(void *first, void *second, size_t size)
         t = *a;
         *a++ = *b;
         *b++ = t;
-    }while(--size > 0);
+    }while (--size > 0);
 }
-void mysort(void *const first, size_t number, size_t size,
-            int (*func_cmp)(const void *, const void *))
+void mysort(void *const first, size_t number, size_t size, int (*func_cmp)(const void *, const void *))
 {
     char *pb = first;
     char *pe = (char *)first + (number - 1) * size;
