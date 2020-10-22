@@ -1,0 +1,16 @@
+app.c
+check.c
+film.c
+film.h
+film_arr.c
+film_arr.h
+inc/io.h
+inc/my_main.h
+io.c
+io.h
+makefile
+my_check.h
+my_main.h
+run_test.bat
+src/app.c
+src/io.c
