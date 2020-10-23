@@ -1,4 +1,4 @@
-#include "my_check.h"
+#include "../inc/my_check.h"
 
 int my_check_feild(char *feild)
 {

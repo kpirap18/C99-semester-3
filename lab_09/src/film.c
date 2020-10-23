@@ -1,4 +1,4 @@
-#include "film.h"
+#include "../inc/film.h"
 #define _POSIX_X_SOURCE 200809L
 /*int film_read(FILE *f, film_r *p_film)
 {
@@ -48,30 +48,15 @@ int film_read(FILE *f, film_r *p_film)
     if ((read = getline(&title, &n, f) != -1) &&
             (read1 = getline(&name, &n1, f) != -1))
     {
-        //printf("%s\n%s\n", title, name);
-        if (title[strlen(title) - 1] == '\n' && strlen(title) > 2)
+        if (title[strlen(title) - 1] == '\n')
             title[strlen(title) - 1] = '\0';
-        else
-        {
-            free(title);
-            free(name);
-            return FILE_INVALID_ARG;
-        }
-        if (name[strlen(name) - 1] == '\n' && strlen(name) > 2)
+        if (name[strlen(name) - 1] == '\n')
             name[strlen(name) - 1] = '\0';
-        else
-        {
-            free(title);
-            free(name);
-            return FILE_INVALID_ARG;
-        }
         rc = fscanf(f, "%d\n", &year);
 
         if ((rc != 1) || \
                 ((rc == 1) && ((year <= MIN_YEAR) || \
-                               (year >= MAX_YEAR))) || \
-                (strlen(name) == 0) || \
-                (strlen(title) == 0))
+                               (year >= MAX_YEAR))))
             return FILE_INVALID_ARG;
         rc = film_init(p_film, title, name, year);
     }

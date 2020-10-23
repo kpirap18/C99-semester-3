@@ -1,7 +1,8 @@
-#include "../inc/app.h"
-#include "../inc/my_check.h"
-#include "../inc/film.h"
-#include "../inc/film_arr.h"
+#include "app.h"
+#include "io.h"
+#include "my_check.h"
+#include "film.h"
+#include "film_arr.h"
 
 int main(/*int argc, char **argv*/)
 {    

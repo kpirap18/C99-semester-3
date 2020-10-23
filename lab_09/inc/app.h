@@ -19,11 +19,12 @@
 #define NOT_FOUND           -3
 #define INVALID_ARG         -4
 #define READ_ERROR          -5
+#define MEMORY_ERR          -6
 
 typedef struct
 {
-    char title[MAX_LEN_TITLE];
-    char name[MAX_LEN_NAME];
+    char *title;
+    char *name;
     int year;
 } film_r;
 

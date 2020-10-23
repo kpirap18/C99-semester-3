@@ -5,9 +5,10 @@
 #include "film_arr.h"
 
 int main(/*int argc, char **argv*/)
-{
+{    
+    setbuf(stdout, NULL);
     int argc = 3;
-    char argv[12][1212] = {"app.exe", "C:/msys64/home/Ira/cprog/lab_09/func_tests/pos_01_in.txt", "year", "1234"};
+    char argv[12][1212] = {"app.exe", "C:/msys64/home/Ira/cprog/lab_09/func_tests/pos_01_in.txt", "name", "1234"};
     int rc = OK;
 
     if ((argc == 4) || (argc == 3))
