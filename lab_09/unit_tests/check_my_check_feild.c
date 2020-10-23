@@ -1,4 +1,4 @@
-#include "../inc/check_main.h"
+#include "check_main.h"
 
 START_TEST(tests_name)
 {

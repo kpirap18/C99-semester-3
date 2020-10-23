@@ -1,20 +1,21 @@
 CC = clang
-INC = ./inc/
+INCPATH = ../inc/
+INC = -I $(INCPATH)
 OUT = ./out/
 SRC = ./src/
 UNIT = ./unit_tests/
 CFLAGS = -pedantic -Wall -Werror -Wextra -Wvla -Wfloat-equal -Wfloat-conversion -std=gnu99
-
-INCFILE := $(wildcard $(INC)*.h)
 
 OBJS = $(OUT)film.o $(OUT)film_arr.o $(OUT)my_check.o
 OBJS_UNIT = $(OUT)check_main.o $(OUT)check_f_count.o $(OUT)check_film_copy.o  \
 $(OUT)check_film_found.o $(OUT)check_film_init.o $(OUT)check_film_read.o \
 $(OUT)check_my_check_feild.o $(OUT)check_my_check_key.o
 
+.PHONY : debug
 debug : CFLAGS += -g3
 debug : app.exe
 
+.PHONY : release
 release : CFLAGS += -DNDEBUG -g0
 release : app.exe
 
@@ -23,41 +24,25 @@ app.exe: $(OBJS) $(OUT)app.o
 unit_tests.exe: $(OBJS) $(OBJS_UNIT)
 	$(CC) $^ -o $@ -lcheck -lpthread -lrt -lsubunit -lm
 
-$(OUT)app.o: $(SRC)app.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)film.o: $(SRC)film.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)film_arr.o: $(SRC)film_arr.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)my_check.o: $(SRC)my_check.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
+$(OUT)%.o: $(SRC)%.c 
+	cd out && $(CC) $(CFLAGS) $(INC) -c ../$<
 
-$(OUT)check_main.o: $(UNIT)check_main.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)check_f_count.o: $(UNIT)check_f_count.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)check_film_copy.o: $(UNIT)check_film_copy.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)check_film_found.o: $(UNIT)check_film_found.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)check_film_init.o: $(UNIT)check_film_init.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)check_film_read.o: $(UNIT)check_film_read.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)check_my_check_feild.o: $(UNIT)check_my_check_feild.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
-$(OUT)check_my_check_key.o: $(UNIT)check_my_check_key.c $(INCFILE)
-	cd out && $(CC) $(CFLAGS) -c ../$<
+$(OUT)check_%.o : $(UNIT)check_%.c
+	cd out && $(CC) $(CFLAGS) $(INC) -c ../$<
 
+.PHONY : run_unit_vg 
+run_unit_vg: unit_tests.exe
+	valgrind --leak-check=full --leak-resolution=med ./unit_tests.exe
 
-run_unit_dr: unit_tests.exe
-	drmemory -lib_blacklist "*" -batch -- unit_tests.exe
+.PHONY : run_app_vg 
+run_app_vg: app.exe
+	valgrind --leak-check=full --leak-resolution=med ./app.exe
 
-run_app_dr: app.exe
-	drmemory -lib_blacklist "*" -batch -- app.exe
-run_func_dr: app.exe
+.PHONY : run_unit_vg 
+run_func_vg: app.exe
+	valgrind --leak-check=full --leak-resolution=med ./app.exe
 
-
-.PHONY : clean debug release
+.PHONY : clean
 clean :
 	$(RM) $(OUT)*.o *.exe
+

@@ -1,9 +1,9 @@
-#include "../inc/check_main.h"
+#include "check_main.h"
 
 START_TEST(tests_usual)
 {
     film_r film = { NULL, NULL, 0};
-    FILE *f = fopen("C:/msys64/home/Ira/cprog/lab_09/unit_tests/f1.txt","r");
+    FILE *f = fopen("f1.txt","r");
     int rc;
 
     if (f)
@@ -19,7 +19,7 @@ END_TEST
 START_TEST(tests_empty_name)
 {
     film_r film = { NULL, NULL, 0};
-    FILE *f = fopen("C:/msys64/home/Ira/cprog/lab_09/unit_tests/f2.txt","r");
+    FILE *f = fopen("f2.txt","r");
     int rc;
 
     if (f)
@@ -35,7 +35,7 @@ END_TEST
 START_TEST(tests_empty_title)
 {
     film_r film = { NULL, NULL, 0};
-    FILE *f = fopen("C:/msys64/home/Ira/cprog/lab_09/unit_tests/f3.txt","r");
+    FILE *f = fopen("f3.txt","r");
     int rc;
 
     if (f)
@@ -51,7 +51,7 @@ END_TEST
 START_TEST(tests_let_year)
 {
     film_r film = { NULL, NULL, 0};
-    FILE *f = fopen("C:/msys64/home/Ira/cprog/lab_09/unit_tests/f4.txt","r");
+    FILE *f = fopen("f4.txt","r");
     int rc;
 
     if (f)

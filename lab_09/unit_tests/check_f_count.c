@@ -1,8 +1,8 @@
-#include "../inc/check_main.h"
+#include "check_main.h"
 
 START_TEST(tests_usual)
 {
-    FILE *f = fopen("C:/msys64/home/Ira/cprog/lab_09/unit_tests/f1.txt","r");
+    FILE *f = fopen("f1.txt","r");
     int rc, n;
 
     if (f)
@@ -17,7 +17,7 @@ END_TEST
 
 START_TEST(tests_usual_more)
 {
-    FILE *f = fopen("C:/msys64/home/Ira/cprog/lab_09/unit_tests/f5.txt","r");
+    FILE *f = fopen("f5.txt","r");
     int rc, n;
 
     if (f)

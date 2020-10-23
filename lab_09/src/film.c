@@ -1,4 +1,4 @@
-#include "../inc/film.h"
+#include "film.h"
 #define _POSIX_X_SOURCE 200809L
 /*int film_read(FILE *f, film_r *p_film)
 {

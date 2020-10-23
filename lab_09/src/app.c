@@ -1,13 +1,13 @@
-#include "../inc/app.h"
-#include "../inc/my_check.h"
-#include "../inc/film.h"
-#include "../inc/film_arr.h"
+#include "app.h"
+#include "my_check.h"
+#include "film.h"
+#include "film_arr.h"
 
-int main(/*int argc, char **argv*/)
+int main(int argc, char **argv)
 {    
     setbuf(stdout, NULL);
-    int argc = 3;
-    char argv[12][1212] = {"app.exe", "func_tests/pos_01_in.txt", "name", "1234"};
+    //int argc = 3;
+    //char argv[12][1212] = {"app.exe", "func_tests/pos_01_in.txt", "name", "1234"};
     int rc = OK;
 
     if ((argc == 4) || (argc == 3))

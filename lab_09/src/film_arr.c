@@ -1,4 +1,4 @@
-#include "../inc/film_arr.h"
+#include "film_arr.h"
 
 int f_count(FILE *f, int *n)
 {

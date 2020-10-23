@@ -1,4 +1,4 @@
-#include "../inc/check_main.h"
+#include "check_main.h"
 
 int main(void)
 {
