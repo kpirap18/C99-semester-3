@@ -1,4 +1,4 @@
-#include "my_main.h"
+#include "app.h"
 #include "io.h"
 #include "my_check.h"
 #include "film.h"
@@ -6,7 +6,7 @@
 
 int main(/*int argc, char **argv*/)
 {
-    int argc = 4;
+    int argc = 3;
     char argv[12][1212] = {"app.exe", "C:/msys64/home/Ira/cprog/lab_09/func_tests/pos_01_in.txt", "year", "1234"};
     int rc = OK;
 
@@ -52,47 +52,40 @@ int main(/*int argc, char **argv*/)
                     int n_films = 0;
                     rc = f_create(f, &films, &n_films, argv[2]);
 
-                    f_print(stdout, films, n_films);
-                }
-            }
-        }
-    }
-
-
-                    /*if (len_catalog == FILE_INVALID_ARG)
+                    if (rc != OK)
                     {
                         //printf("Invalid arg in file\n");
-                        fclose(f);
                         rc = FILE_INVALID_ARG;
                     }
-
-                    if (argc == 4)
+                    else
                     {
-                        int found_number = found_film(films, argv[2], argv[3], len_catalog);
-
-                        if (found_number == NOT_FOUND)
+                        if (argc == 4)
                         {
-                            printf("Not found");
-                            fclose(f);
-                            return OK;
+                            int found_number = film_found(films, argv[2], argv[3], n_films);
+                            if (found_number == NOT_FOUND)
+                            {
+                                printf("Not found");
+
+                                rc = OK;
+                            }
+                            else
+                                film_print(stdout, &films[found_number]);
                         }
                         else
-                            struct_print(films[found_number]);
+                            f_print(stdout, films, n_films);
+                        f_free(films, n_films);
                     }
-                    else
-                        structs_print(films, len_catalog);
+
                 }
-
-                fclose(f);
-
             }
+            fclose(f);
         }
     }
     else
     {
         //printf("Not enough argument\n");
         rc = NOT_ENOUGH_ARG;
-    }*/
+    }
 
     return rc;
 }

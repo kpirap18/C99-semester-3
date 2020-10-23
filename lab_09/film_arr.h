@@ -2,13 +2,15 @@
 #define FILM_ARR_H
 
 #include "film.h"
-#include "my_main.h"
+#include "app.h"
 
 int f_create(FILE *f, film_r **pp_films, int *n_films, char const *field);
 
 int f_count(FILE *f, int *n);
 
 int f_read(FILE *f, film_r *p_films, int n, char const *field);
+
+int film_found(film_r *films, char *field, char *key, int len_catalog);
 
 void f_free(film_r *p_films, int n);
 

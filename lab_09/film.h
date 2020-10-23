@@ -1,7 +1,7 @@
 #ifndef FILM_H
 #define FILM_H
 
-#include "my_main.h"
+#include "app.h"
 
 int film_read(FILE *f, film_r *p_film);
 

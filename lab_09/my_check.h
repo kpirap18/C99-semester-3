@@ -1,7 +1,7 @@
 #ifndef CHECK_H
 #define CHECK_H
 
-#include "my_main.h"
+#include "app.h"
 
 int check_feild(char *feild);
 
