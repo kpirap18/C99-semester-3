@@ -1,4 +1,4 @@
-CC = gcc
+CC = clang
 INC = ./inc/
 OUT = ./out/
 SRC = ./src/
@@ -21,9 +21,9 @@ release : app.exe
 app.exe: $(OBJS) $(OUT)app.o
 	$(CC) $^ -o $@
 unit_tests.exe: $(OBJS) $(OBJS_UNIT)
-	$(CC) $^ -lcheck -o $@
+	$(CC) $^ -o $@ -lcheck -lpthread -lrt -lsubunit -lm
 
-$(OUT)app.o: $(SRC)main.c $(INCFILE)
+$(OUT)app.o: $(SRC)app.c $(INCFILE)
 	cd out && $(CC) $(CFLAGS) -c ../$<
 $(OUT)film.o: $(SRC)film.c $(INCFILE)
 	cd out && $(CC) $(CFLAGS) -c ../$<

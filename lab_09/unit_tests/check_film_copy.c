@@ -2,14 +2,14 @@
 
 START_TEST(tests_usual)
 {
-    film_r film_to, film_from = { "Qwerty", "asdfg", 1234};
+    film_r film_to = { NULL, NULL, 0};
+    film_r film_from = { "Qwerty", "asdfg", 1234};
     int rc;
 
     rc = film_copy(&film_to, &film_from);
     ck_assert_int_eq(rc, OK);
 
     film_free_one(&film_to);
-    film_free_one(&film_from);
 }
 END_TEST
 

@@ -14,7 +14,7 @@ START_TEST(tests_error)
     int rc;
 
     rc = my_check_feild("t");
-    ck_assert_int_eq(rc, OK);
+    ck_assert_int_eq(rc, INVALID_ARG);
 }
 END_TEST
 

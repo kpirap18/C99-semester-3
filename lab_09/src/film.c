@@ -48,15 +48,29 @@ int film_read(FILE *f, film_r *p_film)
     if ((read = getline(&title, &n, f) != -1) &&
             (read1 = getline(&name, &n1, f) != -1))
     {
-        if (title[strlen(title) - 1] == '\n')
+        if (title[strlen(title) - 1] == '\n' && strlen(title) > 2)
             title[strlen(title) - 1] = '\0';
-        if (name[strlen(name) - 1] == '\n')
+        else
+        {
+            free(title);
+            free(name);
+            return FILE_INVALID_ARG;
+        }
+        if (name[strlen(name) - 1] == '\n' && strlen(name) > 2)
             name[strlen(name) - 1] = '\0';
+        else
+        {
+            free(title);
+            free(name);
+            return FILE_INVALID_ARG;
+        }
         rc = fscanf(f, "%d\n", &year);
 
         if ((rc != 1) || \
                 ((rc == 1) && ((year <= MIN_YEAR) || \
-                               (year >= MAX_YEAR))))
+                               (year >= MAX_YEAR))) || \
+                (strlen(name) == 0) || \
+                (strlen(title) == 0))
             return FILE_INVALID_ARG;
         rc = film_init(p_film, title, name, year);
     }

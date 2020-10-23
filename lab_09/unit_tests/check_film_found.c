@@ -2,24 +2,24 @@
 
 START_TEST(tests_found_name)
 {
-    film_r films[3] = {{ "Qwerty", "aaaaa", 12},
+    film_r films[3] = {{ "Awerty", "aaaaa", 12},
                        { "Dasdff", "dfdfaa", 512},
-                       { "Okmnj", "adfda", 128}};
+                       { "Okmnj", "ldfda", 128}};
     int rc;
 
-    rc = film_found(films, "name", "aaaaa", 3);
-    ck_assert_int_eq(rc, 0);
+    rc = film_found(films, "name", "ldfda", 3);
+    ck_assert_int_eq(rc, 2);
 }
 END_TEST
 
 START_TEST(tests_found_title)
 {
-    film_r films[3] = {{ "Qwerty", "aaaaa", 12},
+    film_r films[3] = {{ "Awerty", "aaaaa", 12},
                        { "Dasdff", "dfdfaa", 512},
-                       { "Okmnj", "adfda", 128}};
+                       { "Okmnj", "ldfda", 128}};
     int rc;
 
-    rc = film_found(films, "title", "Qwerty", 3);
+    rc = film_found(films, "title", "Awerty", 3);
     ck_assert_int_eq(rc, 0);
 }
 END_TEST

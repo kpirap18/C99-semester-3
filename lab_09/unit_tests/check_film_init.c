@@ -2,7 +2,7 @@
 
 START_TEST(tests_usual)
 {
-    film_r film;
+    film_r film = { NULL, NULL, 0};
     int rc;
 
     rc = film_init(&film, "Qwerty", "Assdfg", 1234);

@@ -2,7 +2,6 @@
 
 int f_count(FILE *f, int *n)
 {
-    printf("f_count\n");
     film_r buf = { NULL, NULL, 0};
     int i = 0, rc = OK;
 
@@ -28,7 +27,6 @@ int f_count(FILE *f, int *n)
 
 int f_create(FILE *f, film_r **pp_films, int *n_films, char const *field)
 {
-    printf("f_create\n");
     film_r *film;
     int n, rc;
 
@@ -108,7 +106,6 @@ int add_in_array(film_r *films, film_r *film, int len, char const *field)
 
 int f_read(FILE *f, film_r *p_films, int n, char const *field)
 {
-    printf("f_read\n");
     int rc = OK;
     film_r buf = { NULL, NULL, 0};
 
@@ -128,7 +125,7 @@ int f_read(FILE *f, film_r *p_films, int n, char const *field)
 int film_found(film_r *films, char *field, char *key, int len_catalog)
 {
     int left = 0;
-    int right = len_catalog;
+    int right = len_catalog - 1;
     int search = -1;
 
     while (left <= right)
@@ -137,28 +134,40 @@ int film_found(film_r *films, char *field, char *key, int len_catalog)
 
         if (strcmp(field, "title") == 0)
         {
-            if (strcmp(key, films[mid].title) == 0)
+            if (strncmp(key, films[mid].title, 
+            (strlen(key) < strlen(films[mid].title)) ? strlen(key) : strlen(films[mid].title)) == 0)
             {
                 search = mid;
                 break;
             }
-            if (strcmp(key, films[mid].title) < 0)
+            if (strncmp(key, films[mid].title, 
+            (strlen(key) < strlen(films[mid].title)) ? strlen(key) : strlen(films[mid].title)) < 0)
+            {
                 right = mid - 1;
+            }
             else
+            {
                 left = mid + 1;
+            }
         }
 
         if (strcmp(field, "name") == 0)
         {
-            if (strcmp(key, films[mid].name) == 0)
+            if (strncmp(key, films[mid].name, 
+            (strlen(key) < strlen(films[mid].name)) ? strlen(key) : strlen(films[mid].name)) == 0)
             {
                 search = mid;
                 break;
             }
-            if (strcmp(key, films[mid].name) < 0)
+            if (strncmp(key, films[mid].name, 
+            (strlen(key) < strlen(films[mid].name)) ? strlen(key) : strlen(films[mid].name)) < 0)
+            {
                 right = mid - 1;
+            }
             else
+            {
                 left = mid + 1;
+            }
         }
 
         if (strcmp(field, "year") == 0)
@@ -171,9 +180,13 @@ int film_found(film_r *films, char *field, char *key, int len_catalog)
                 break;
             }
             if (key_year < films[mid].year)
+            {
                 right = mid - 1;
+            }
             else
+            {
                 left = mid + 1;
+            }
         }
 
     }
