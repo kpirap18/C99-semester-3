@@ -73,19 +73,19 @@ run_func_dr: app.exe
 	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/pos_14_in.txt year > out.txt
 	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/pos_15_in.txt year > out.txt
 	
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_01_in.txt year > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_02_in.txt year > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_03_in.txt year > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_04_in.txt year > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_05_in.txt year > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_07_in.txt year > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_08_in.txt year > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_09_in.txt year 0 > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_10_in.txt year ee > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_11_in.txt year -4 > out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_12_in.txt year asd ASD qww> out.txt
-	valgrind --leak-check=full --leak-resolution=med ./app.exe 
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_14_in.txt years > out.txt
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_01_in.txt year > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_02_in.txt year > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_03_in.txt year > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_04_in.txt year > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_05_in.txt year > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_07_in.txt year > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_08_in.txt year > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_09_in.txt year 0 > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_10_in.txt year ee > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_11_in.txt year -4 > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_12_in.txt year asd ASD qww> out.txt; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe ; true
+	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/neg_14_in.txt years > out.txt; true
 .PHONY : clean debug release
 clean :
 	$(RM) $(OUT)*.o *.exe
