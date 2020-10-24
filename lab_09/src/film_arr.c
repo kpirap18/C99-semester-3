@@ -7,7 +7,7 @@ int f_count(FILE *f, int *n)
 
     while (rc == OK)
     {
-        printf("rc = %d\n", rc);
+        //printf("rc = %d\n", rc);
         rc = film_read(f, &buf);
 
         if (rc == OK)
@@ -115,7 +115,7 @@ int f_read(FILE *f, film_r *p_films, int n, char const *field)
     for (int i = 1; rc == OK && i < n; i++)
     {
         rc = film_read(f, &buf);
-        printf("%d\n", i);
+        //printf("%d\n", i);
         rc = add_in_array(p_films, &buf, i, field);
     }
 
