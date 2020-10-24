@@ -1,40 +1,5 @@
 #include "film.h"
 #define _POSIX_X_SOURCE 200809L
-/*int film_read(FILE *f, film_r *p_film)
-{
-    char title[MAX_LEN_TITLE], name[MAX_LEN_NAME];
-    int year;
-    int rc = 0;
-
-    int right = 1;
-    if ((fgets(title, MAX_LEN_TITLE, f) != NULL) && \
-            (fscanf(f, "%*[\n]") || right) && \
-            (fgets(name, MAX_LEN_NAME, f) != NULL) && \
-            (fscanf(f, "%*[\n]") || right))
-    {
-        if (title[strlen(title) - 1] == '\n')
-            title[strlen(title) - 1] = '\0';
-
-        if (name[strlen(name) - 1] == '\n')
-            name[strlen(name) - 1] = '\0';
-
-        rc = fscanf(f, "%d\n", &year);
-
-        if ((rc != 1) || \
-                ((rc == 1) && ((year <= MIN_YEAR) || \
-                               (year >= MAX_YEAR))) || \
-                (strlen(name) == 0) || \
-                (strlen(title) == 0) || \
-                (strlen(name) > MAX_RIGHT_NAMETITLE) || \
-                (strlen(title) > MAX_RIGHT_NAMETITLE))
-            return FILE_INVALID_ARG;
-        rc = film_init(p_film, title, name, year);
-    }
-    else
-        return FILE_INVALID_ARG;
-
-    return rc;
-}*/
 
 int film_read(FILE *f, film_r *p_film)
 {
@@ -48,33 +13,31 @@ int film_read(FILE *f, film_r *p_film)
     if ((read = getline(&title, &n, f)) != -1)
     {
         n = 0;
-        //printf("%s", title);
-        if (title[strlen(title) - 2] == '\n')
-            title[strlen(title) - 2] = '\0';
+        printf("title - %s\n", title);
+        if (title[strlen(title) - 1] == '\n')
+            title[strlen(title) - 1] = '\0';
 
-        //printf("%s", title);
+        printf("title2 - %s\n", title);
         if ((read = getline(&name, &n, f)) != -1)
         {
-            //printf("%s", name);
-            if (name[strlen(name) - 2] == '\n')
-                name[strlen(name) - 2] = '\0';
-            //printf("%s", name);
+            printf("name - %s\n", name);
+            if (name[strlen(name) - 1] == '\n')
+                name[strlen(name) - 1] = '\0';
+            printf("name2 - %s\n", name);
             rc = fscanf(f, "%d\n", &year);
 
-            //printf("%d", year);
-            if ((rc != 1) || \
-                    ((rc == 1) && ((year <= MIN_YEAR) || \
-                                (year >= MAX_YEAR))) || \
-                    (strlen(name) == 0) || \
-                    (strlen(title) == 0))
+            printf("%d\n", year);
+            if ((rc == 1) && ((year > MIN_YEAR) && (year < MAX_YEAR)) && \
+                    (strlen(name) != 0) && \
+                    (strlen(title) != 0))
             {
-                //printf("jjj");
+                rc = film_init(p_film, title, name, year);
+            }
+            else
+            {
                 rc = FILE_INVALID_ARG;
             }
-            //printf("%d", rc);
-            if (rc == 1)
-                rc = film_init(p_film, title, name, year);
-
+            
         }
         else
         {
@@ -94,6 +57,12 @@ int film_read(FILE *f, film_r *p_film)
 
 int film_init(film_r *p_film, const char *title, const char *name, int year)
 {
+    printf("f_init\n");
+    int i = 0;
+    for (i = 0; i <= (int)strlen(name); i++)
+        printf("for %d = %s", i, &name[i]);
+    printf("%d = %c", i, name[i]);
+    
     char *tit = NULL;
     char *nam = NULL;
     int rc = OK;
@@ -104,8 +73,8 @@ int film_init(film_r *p_film, const char *title, const char *name, int year)
         nam = malloc((strlen(name) + 1) * sizeof(char));
         if (nam)
         {
-            tit = strcpy(tit, title);
-            nam = strcpy(nam, name);
+            tit = strncpy(tit, title, strlen(title));
+            nam = strncpy(nam, name, strlen(name));
 
             free(p_film->name);
             free(p_film->title);
@@ -118,15 +87,15 @@ int film_init(film_r *p_film, const char *title, const char *name, int year)
         }
         else
         {
-            printf("No nam\n");
+            //printf("No nam\n");
             free(tit);
             rc = MEMORY_ERR;
         }
     }
     else
     {
-        printf("No tit\n");
-        rc = READ_ERROR;
+        //printf("No tit\n");
+        rc = MEMORY_ERR;
     }
     
     return rc;
@@ -134,6 +103,10 @@ int film_init(film_r *p_film, const char *title, const char *name, int year)
 
 int film_copy(film_r *to, const film_r *from)
 {
+    printf("f_copy\n");
+    printf("jjjj");
+    film_print(stdout, (film_r *)from);
+    
     return film_init(to, from->title, from->name, from->year);
 }
 

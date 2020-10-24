@@ -1,30 +1,26 @@
+rc = 0
 Terminator
-
-James Cameron
-
-1984
-The Terminal
-
-Steven Allan Spielberg
-
-2004
-Avatar
-
-James Cameron
-
-2009
+TerminatorJames Cameron
+James Cameron19841rc = 0
 Avengers
-
-Joss Whedon
-
-2012
+AvengersJoss Whedon
+Joss Whedon20121rc = 0
+Avatar
+AvatarJames Cameron
+James Cameron20091rc = 0
 1+1
-
-Olivier Nakache
-
-2012
+1+1Olivier Nakache
+Olivier Nakache20121rc = 0
+The Terminal
+The TerminalSteven Allan Spielberg
+Steven Allan Spielberg20041rc = 0
 A Dogs Purpose
-
-Lars Sven Hallstrom
-
-2017
+A Dogs PurposeLars Sven Hallstrom
+Lars Sven Hallstrom20171rc = 0
+Terminator
+TerminatorJames Cameron
+James Cameron19841Avengers
+AvengersJoss Whedon
+Joss Whedon20121Avatar
+AvatarJames Cameron
+James Cameron20091
