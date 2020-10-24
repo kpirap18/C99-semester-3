@@ -6,15 +6,16 @@
 int main(int argc, char **argv)
 {    
     setbuf(stdout, NULL);
-    //i//nt argc = 3;
-    //char argv[12][1212] = {"app.exe", "func_tests/pos_01_in.txt", "year", "1234"};
+    //int argc = 3;
+    //char argv[12][1212] = {"app.exe", "func_tests/pos_01_in.txt", "name", "Olivier Nakache"};
     int rc = OK;
 
+    printf("%d   %s\n", argc, argv[2]);
     if ((argc == 4) || (argc == 3))
     {
         if (my_check_feild(argv[2]) == INVALID_ARG)
         {
-            //printf("Not right argument\n");
+            printf("Not right argument\n");
             rc = INVALID_ARG;
         }
         else
@@ -23,7 +24,7 @@ int main(int argc, char **argv)
             f = fopen(argv[1], "r");
             if (f == NULL)
             {
-                //printf("No such file or directory\n");
+                printf("No such file or directory\n");
                 rc = OPEN_ERROR;
             }
             else
@@ -33,7 +34,7 @@ int main(int argc, char **argv)
                 {
                     if (strcmp(argv[2], "year") == 0 && my_check_key(argv[3]) == INVALID_ARG)
                     {
-                        //printf("Not right argument\n");
+                        printf("Not right argument\n");
                         rc = INVALID_ARG;
                     }
 
@@ -41,7 +42,7 @@ int main(int argc, char **argv)
                     if (((strcmp(argv[2], "title") == 0) || (strcmp(argv[2], "name") == 0)) &&
                             strlen(argv[3]) > MAX_LEN_ARRAY - 1)
                     {
-                        //printf("Not right argument\n");
+                        printf("Not right argument\n");
                         rc =  INVALID_ARG;
                     }
                 }
@@ -54,7 +55,7 @@ int main(int argc, char **argv)
 
                     if (rc != OK)
                     {
-                        //printf("Invalid arg in file\n");
+                        printf("Invalid arg in file\n");
                         rc = FILE_INVALID_ARG;
                     }
                     else
@@ -73,6 +74,7 @@ int main(int argc, char **argv)
                         }
                         else
                             f_print(stdout, films, n_films);
+                        printf("free - ALL\n");
                         f_free(films, n_films);
                     }
 

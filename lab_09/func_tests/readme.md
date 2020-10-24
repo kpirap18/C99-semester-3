@@ -26,7 +26,7 @@
 	(./app.exe pos_09_in.txt title The Terminal)
 - 10 - тест с ключом Olivier Nakache и полем name 
 	(./app.exe pos_10_in.txt name Olivier Nakache)
-- 11 - тест на ненахождение структуры с ключом year  
+- 11 - тест на ненахождение структуры с ключом year 
 	(./app.exe pos_11_in.txt year 2020)
 - 12 - тест на ненахождение структуры с ключом title 
 	(./app.exe pos_12_in.txt title AdM)

@@ -7,7 +7,7 @@ int f_count(FILE *f, int *n)
 
     while (rc == OK && (!feof(f)))
     {
-        printf("rc = %d\n", rc);
+        //printf("rc = %d\n", rc);
         rc = film_read(f, &buf);
 
         if (rc == OK)
@@ -41,7 +41,7 @@ int f_create(FILE *f, film_r **pp_films, int *n_films, char const *field)
         if (film)
         {
             rewind(f);
-            printf("F_COUNT!!!\n count = %d", n);
+            //printf("F_COUNT!!!\n count = %d", n);
             rc = f_read(f, film, n, field);
 
             if (rc == OK)
@@ -62,16 +62,27 @@ int f_create(FILE *f, film_r **pp_films, int *n_films, char const *field)
 
     return rc;
 }
+int swap_film_str(film_r *film1, film_r *film2)
+{
+    film_r buf = { NULL, NULL, 0};
+    int rc = OK;
 
+    if (film_copy(&buf, film1) || film_copy(film1, film2) || film_copy(film2, &buf))
+        {
+            rc = MEMORY_ERR;
+        }
+    film_free_one(&buf);
+
+    return rc;
+}
 int add_in_array(film_r *films, film_r *film, int len, char const *field)
 {
-    film_r film_rewrite;
     int pos = 0;
     int rc = OK;
 
     if (strcmp(field, "title") == 0)
     {
-        printf("titile\n");
+        //printf("titile\n");
         for (int i = 0; i < len; i++)
         {
             if (strcmp(film->title, films[i].title) < 0)
@@ -93,7 +104,7 @@ int add_in_array(film_r *films, film_r *film, int len, char const *field)
 
     if (strcmp(field, "year") == 0)
     {
-        printf("year\n");
+        //rintf("year\n");
         for (int i = 0; i < len; i++)
         {
             if (film->year < films[i].year)
@@ -101,23 +112,11 @@ int add_in_array(film_r *films, film_r *film, int len, char const *field)
             ++pos;
         }
     }
-
-    printf("len = %d\npos = %d\n", len, pos);
     for (int i = len - 1; i >= pos; i--)
     {
-        printf("for");
-        if (film_copy(&film_rewrite, &films[i]) || 
-            film_copy(&films[i], &films[i + 1]) ||
-            film_copy(&films[i + 1], &film_rewrite))
-        {
-            rc = MEMORY_ERR;
-            break;
-        }
+        rc = swap_film_str(&films[i], &films[i + 1]);
     }
-    film_print(stdout, film);
-    film_copy(&films[pos], film);
-    film_free_one(&film_rewrite);
-
+    rc = film_copy(&films[pos], film);
     return rc;
 }
 
@@ -132,10 +131,10 @@ int f_read(FILE *f, film_r *p_films, int n, char const *field)
     for (int i = 1; rc == OK && i < n; i++)
     {
         rc = film_read(f, &buf);
-        printf("i = %d\n", i);
         rc = add_in_array(p_films, &buf, i, field);
     }
 
+    film_free_one(&buf);
     return rc;
 }
 
@@ -216,8 +215,9 @@ int film_found(film_r *films, char *field, char *key, int len_catalog)
 void f_free(film_r *p_films, int n)
 {
     for (int i = 0; i < n; i++)
-        if ((p_films + i))
-            film_free_one(p_films + i);
+    {
+        film_free_one(p_films + i);
+    }
     free(p_films);
 }
 

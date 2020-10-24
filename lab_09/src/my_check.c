@@ -2,6 +2,10 @@
 
 int my_check_feild(char *feild)
 {
+    printf("%d\n", (strcmp(feild, "year")));
+    printf("%d\n", (strcmp(feild, "name")));
+    printf("%d\n", (strcmp(feild, "title")));
+
     if ((strcmp(feild, "title") != 0) && (strcmp(feild, "name") != 0) && (strcmp(feild, "year") != 0))
         return INVALID_ARG;
 

@@ -13,20 +13,13 @@ int film_read(FILE *f, film_r *p_film)
     if ((read = getline(&title, &n, f)) != -1)
     {
         n = 0;
-        printf("title - %s\n", title);
-        if (title[strlen(title) - 1] == '\n')
-            title[strlen(title) - 1] = '\0';
+        title[strlen(title) - 2] = '\0';
 
-        printf("title2 - %s\n", title);
         if ((read = getline(&name, &n, f)) != -1)
         {
-            printf("name - %s\n", name);
-            if (name[strlen(name) - 1] == '\n')
-                name[strlen(name) - 1] = '\0';
-            printf("name2 - %s\n", name);
+            name[strlen(name) - 2] = '\0';
             rc = fscanf(f, "%d\n", &year);
 
-            printf("%d\n", year);
             if ((rc == 1) && ((year > MIN_YEAR) && (year < MAX_YEAR)) && \
                     (strlen(name) != 0) && \
                     (strlen(title) != 0))
@@ -57,55 +50,40 @@ int film_read(FILE *f, film_r *p_film)
 
 int film_init(film_r *p_film, const char *title, const char *name, int year)
 {
-    printf("f_init\n");
-    int i = 0;
-    for (i = 0; i <= (int)strlen(name); i++)
-        printf("for %d = %s", i, &name[i]);
-    printf("%d = %c", i, name[i]);
-    
-    char *tit = NULL;
-    char *nam = NULL;
-    int rc = OK;
+    char *tit = strdup(title);
+    char *nam = strdup(name);
 
-    tit = malloc((strlen(title) + 1) * sizeof(char));
-    if (tit)
+    if (tit && nam)
     {
-        nam = malloc((strlen(name) + 1) * sizeof(char));
-        if (nam)
-        {
-            tit = strncpy(tit, title, strlen(title));
-            nam = strncpy(nam, name, strlen(name));
+        free(p_film->name);
+        free(p_film->title);
 
-            free(p_film->name);
-            free(p_film->title);
+        p_film->title = tit;
+        p_film->name = nam;
+        p_film->year = year;
 
-            p_film->title = tit;
-            p_film->name = nam;
-            p_film->year = year;
-
-            rc = OK;
-        }
-        else
-        {
-            //printf("No nam\n");
-            free(tit);
-            rc = MEMORY_ERR;
-        }
+        return OK;
     }
     else
     {
-        //printf("No tit\n");
-        rc = MEMORY_ERR;
+        free(tit);
+        free(nam);
     }
     
-    return rc;
+    return READ_ERROR;
 }
 
 int film_copy(film_r *to, const film_r *from)
 {
-    printf("f_copy\n");
-    printf("jjjj");
-    film_print(stdout, (film_r *)from);
+    if (from->year == 0 || from->title == NULL || from->name == NULL)
+    {
+        film_free_one(to);
+        to->title = NULL;
+        to->name = NULL;
+        to->year = 0;
+
+        return OK;
+    }
     
     return film_init(to, from->title, from->name, from->year);
 }

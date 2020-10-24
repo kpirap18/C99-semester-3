@@ -1,19 +1,18 @@
 #include "app.h"
-#include "io.h"
 #include "my_check.h"
 #include "film.h"
 #include "film_arr.h"
 
-int main(/*int argc, char **argv*/)
+int main(int argc, char **argv)
 {    
     setbuf(stdout, NULL);
-    int argc = 3;
-    char argv[12][1212] = {"app.exe", "C:/msys64/home/Ira/cprog/lab_09/func_tests/pos_01_in.txt", "name", "1234"};
+    //int argc = 3;
+    //char argv[12][1212] = {"app.exe", "func_tests/pos_01_in.txt", "name", "Olivier Nakache"};
     int rc = OK;
 
     if ((argc == 4) || (argc == 3))
     {
-        if (check_feild(argv[2]) == INVALID_ARG)
+        if (my_check_feild(argv[2]) == INVALID_ARG)
         {
             //printf("Not right argument\n");
             rc = INVALID_ARG;
@@ -32,7 +31,7 @@ int main(/*int argc, char **argv*/)
 
                 if (argc == 4)
                 {
-                    if (strcmp(argv[2], "year") == 0 && check_key(argv[3]) == INVALID_ARG)
+                    if (strcmp(argv[2], "year") == 0 && my_check_key(argv[3]) == INVALID_ARG)
                     {
                         //printf("Not right argument\n");
                         rc = INVALID_ARG;
@@ -74,12 +73,13 @@ int main(/*int argc, char **argv*/)
                         }
                         else
                             f_print(stdout, films, n_films);
+                        printf("free - ALL\n");
                         f_free(films, n_films);
                     }
 
                 }
+                fclose(f);
             }
-            fclose(f);
         }
     }
     else

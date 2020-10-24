@@ -1,26 +1,0 @@
-rc = 0
-Terminator
-TerminatorJames Cameron
-James Cameron19841rc = 0
-Avengers
-AvengersJoss Whedon
-Joss Whedon20121rc = 0
-Avatar
-AvatarJames Cameron
-James Cameron20091rc = 0
-1+1
-1+1Olivier Nakache
-Olivier Nakache20121rc = 0
-The Terminal
-The TerminalSteven Allan Spielberg
-Steven Allan Spielberg20041rc = 0
-A Dogs Purpose
-A Dogs PurposeLars Sven Hallstrom
-Lars Sven Hallstrom20171rc = 0
-Terminator
-TerminatorJames Cameron
-James Cameron19841Avengers
-AvengersJoss Whedon
-Joss Whedon20121Avatar
-AvatarJames Cameron
-James Cameron20091
