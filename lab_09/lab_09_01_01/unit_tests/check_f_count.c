@@ -2,7 +2,7 @@
 
 START_TEST(tests_usual)
 {
-    FILE *f = fopen("f1.txt","r");
+    FILE *f = fopen("func_tests/f1.txt","r");
     int rc, n;
 
     if (f)
@@ -17,7 +17,7 @@ END_TEST
 
 START_TEST(tests_usual_more)
 {
-    FILE *f = fopen("f5.txt","r");
+    FILE *f = fopen("func_tests/f5.txt","r");
     int rc, n;
 
     if (f)
@@ -32,14 +32,14 @@ END_TEST
 
 START_TEST(tests_empty_name)
 {
-    FILE *f = fopen("C:/msys64/home/Ira/cprog/lab_09/unit_tests/f2.txt","r");
+    FILE *f = fopen("func_tests/f2.txt","r");
     int rc, n;
 
     if (f)
     {
         rc = f_count(f, &n);
-        ck_assert_int_eq(rc, FILE_INVALID_ARG);
-        ck_assert_int_eq(n, 0);
+        ck_assert_int_eq(rc, OK);
+        ck_assert_int_eq(n, 1);
         fclose(f);
     }
 }
@@ -47,14 +47,14 @@ END_TEST
 
 START_TEST(tests_empty_title)
 {
-    FILE *f = fopen("C:/msys64/home/Ira/cprog/lab_09/unit_tests/f3.txt","r");
+    FILE *f = fopen("func_tests/f3.txt","r");
     int rc, n;
 
     if (f)
     {
         rc = f_count(f, &n);
-        ck_assert_int_eq(rc, FILE_INVALID_ARG);
-        ck_assert_int_eq(n, 0);
+        ck_assert_int_eq(rc, OK);
+        ck_assert_int_eq(n, 1);
         fclose(f);
     }
 }
@@ -62,7 +62,7 @@ END_TEST
 
 START_TEST(tests_let_year)
 {
-    FILE *f = fopen("C:/msys64/home/Ira/cprog/lab_09/unit_tests/f4.txt","r");
+    FILE *f = fopen("func_tests/f4.txt","r");
     int rc, n;
 
     if (f)

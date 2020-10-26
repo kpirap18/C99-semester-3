@@ -6,8 +6,6 @@
 int main(int argc, char **argv)
 {    
     setbuf(stdout, NULL);
-    //int argc = 3;
-    //char argv[12][1212] = {"app.exe", "func_tests/pos_01_in.txt", "name", "Olivier Nakache"};
     int rc = OK;
 
     if ((argc == 4) || (argc == 3))
@@ -28,7 +26,6 @@ int main(int argc, char **argv)
             }
             else
             {
-
                 if (argc == 4)
                 {
                     if (strcmp(argv[2], "year") == 0 && my_check_key(argv[3]) == INVALID_ARG)
@@ -39,7 +36,7 @@ int main(int argc, char **argv)
 
 
                     if (((strcmp(argv[2], "title") == 0) || (strcmp(argv[2], "name") == 0)) &&
-                            strlen(argv[3]) > MAX_LEN_ARRAY - 1)
+                            strlen(argv[3]) <= 0)
                     {
                         //printf("Not right argument\n");
                         rc =  INVALID_ARG;
@@ -64,7 +61,7 @@ int main(int argc, char **argv)
                             int found_number = film_found(films, argv[2], argv[3], n_films);
                             if (found_number == NOT_FOUND)
                             {
-                                printf("Not found");
+                                fprintf(stdout, "Not found");
 
                                 rc = OK;
                             }
@@ -73,7 +70,6 @@ int main(int argc, char **argv)
                         }
                         else
                             f_print(stdout, films, n_films);
-                        printf("free - ALL\n");
                         f_free(films, n_films);
                     }
 

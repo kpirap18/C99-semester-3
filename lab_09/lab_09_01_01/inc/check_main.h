@@ -26,4 +26,8 @@ Suite* my_check_feild_suite(void);
 
 Suite* my_check_key_suite(void);
 
+Suite* f_create_suite(void);
+
+Suite* f_read_suite(void);
+
 #endif // CHECK_MAIN_H

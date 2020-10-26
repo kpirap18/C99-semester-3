@@ -18,6 +18,15 @@ START_TEST(tests_error)
 }
 END_TEST
 
+START_TEST(tests_error_neg)
+{
+    int rc;
+
+    rc = my_check_feild("-89");
+    ck_assert_int_eq(rc, INVALID_ARG);
+}
+END_TEST
+
 
 
 Suite* my_check_key_suite(void)
@@ -30,6 +39,7 @@ Suite* my_check_key_suite(void)
 
     tc_neg = tcase_create("negatives");
     tcase_add_test(tc_neg, tests_error);
+	tcase_add_test(tc_neg, tests_error_neg);
     suite_add_tcase(s, tc_neg);
 
 

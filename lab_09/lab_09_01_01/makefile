@@ -1,4 +1,4 @@
-CC = clang
+CC = gcc
 INCPATH := ../inc/
 INC := -I $(INCPATH)
 OUT = ./out/
@@ -21,7 +21,7 @@ release : app.exe
 app.exe: $(OBJS) $(OUT)app.o
 	$(CC) $^ -o $@
 unit_tests.exe: $(OBJS) $(OBJS_UNIT)
-	$(CC) $^ -o $@ -lcheck -lpthread -lrt -lsubunit -lm
+	$(CC) $^ -o $@ -lcheck 
 
 $(OUT)check_%.o : $(UNIT)check_%.c
 	cd out && $(CC) $(CFLAGS) $(INC) -c ../$<
@@ -31,13 +31,13 @@ $(OUT)%.o : $(SRC)%.c
 
 
 run_unit_vg: unit_tests.exe
-	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck  ./unit_tests.exe
+	valgrind --leak-check=full --leak-resolution=med --leak-check=full  ./unit_tests.exe
 
 run_app_vg: app.exe
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe
 	
 run_func_vg: app.exe
-	valgrind --leak-check=full --leak-resolution=med ./app.exe func_tests/pos_01_in.txt year > out.txt
+	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_01_in.txt year > out.txt
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_02_in.txt title > out.txt
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_03_in.txt name > out.txt
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_04_in.txt year > out.txt
@@ -46,7 +46,7 @@ run_func_vg: app.exe
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_07_in.txt name "James Cameron" > out.txt
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_08_in.txt year 1984 > out.txt
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_09_in.txt title "The Terminal" > out.txt
-	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_10_in.txt name "Olivier Nakache" > out.txt; true
+	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_10_in.txt name "Olivier Nakache" > out.txt;
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_11_in.txt year 2020 > out.txt
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_12_in.txt title AdM > out.txt
 	valgrind --leak-check=full --leak-resolution=med --track-origins=yes -s --show-reachable=yes --tool=memcheck ./app.exe func_tests/pos_13_in.txt name Fedor > out.txt

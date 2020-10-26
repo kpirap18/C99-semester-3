@@ -72,6 +72,7 @@ START_TEST(tests_found_year_not)
 }
 END_TEST
 
+
 Suite* film_found_suite(void)
 {
     Suite *s;
@@ -90,3 +91,4 @@ Suite* film_found_suite(void)
 
     return s;
 }
+

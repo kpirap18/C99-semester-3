@@ -10,8 +10,8 @@ int main(void)
     srunner_add_suite(runner, film_init_suite());
     srunner_add_suite(runner, film_copy_suite());
     srunner_add_suite(runner, f_count_suite());
-//    srunner_add_suite(runner, f_create_suite());
-//    srunner_add_suite(runner, f_read_suite());
+    srunner_add_suite(runner, f_create_suite());
+    srunner_add_suite(runner, f_read_suite());
     srunner_add_suite(runner, film_found_suite());
     srunner_add_suite(runner, my_check_feild_suite());
     srunner_add_suite(runner, my_check_key_suite());

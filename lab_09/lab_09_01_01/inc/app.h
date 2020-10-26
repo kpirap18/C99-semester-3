@@ -1,14 +1,12 @@
-#ifndef MY_MAIN_H
-#define MY_MAIN_H
+#ifndef APP_H
+#define APP_H
+
+#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX_RIGHT_NAMETITLE 25
-#define MAX_LEN_TITLE       50
-#define MAX_LEN_NAME        50
-#define MAX_LEN_ARRAY       15
 #define MAX_YEAR          2050
 #define MIN_YEAR             0
 
