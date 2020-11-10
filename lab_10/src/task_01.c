@@ -39,24 +39,16 @@ void insert(node_t **head, node_t *elem, node_t *before)
         elem->next = before;
         *head = elem;
     }
-    else
+    
+    while (tmp)
     {
-        if (tmp->next && tmp->next != before)
-        {
-            for ( ; tmp->next && (tmp->next != before); tmp = tmp->next)
-                ;
-
-            if (tmp->next->next == before)
-            {
-                tmp = tmp->next;
-            }
-        }
-
         if (tmp->next == before)
         {
-            tmp->next = elem;
             elem->next = before;
+            tmp->next = elem;
+            break;
         }
+        tmp = tmp->next;
     }
 }
 

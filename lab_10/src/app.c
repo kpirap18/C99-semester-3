@@ -57,9 +57,10 @@ int main(int argc, char **argv)
         head = listread(f_in, &num);
         if (head != NULL)
         {
-            pop_back(&head);
+            void *buf = pop_back(&head);
             listprint(f_out, head);
             free(num);
+            free(buf);
             listfree(head);
         }
         else
@@ -78,11 +79,11 @@ int main(int argc, char **argv)
             {
                 num_p = atoi(argv[5]);
             }
-            int num_i;   
+            int num_b;   
             rc += my_check_key(argv[4]);
             if (rc == OK)
             {
-                num_i = atoi(argv[4]);
+                num_b = atoi(argv[4]);
             }
 
             if (rc != OK)
@@ -92,7 +93,7 @@ int main(int argc, char **argv)
             else
             {
                 node_t *res = find(head, &num_p, comparator_int);
-                node_t *node = listcreatenode((void *)&num_i);
+                node_t *node = listcreatenode((void *)&num_b);
                 insert(&head, node, res);
                 listprint(f_out, head);
             }
@@ -103,7 +104,6 @@ int main(int argc, char **argv)
         {
             rc = INSERTERROR;
         }
-        
     }
     else if (argc == 4 && (strcmp(argv[3], "r") == 0))
     {
@@ -126,7 +126,6 @@ int main(int argc, char **argv)
         if (head != NULL)
         {
             node_t *new_head = sort(head, comparator_int);
-            //printf("\n");
             listprint(f_out, new_head);
             free(num);
             listfree(new_head);

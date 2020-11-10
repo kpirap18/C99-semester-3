@@ -8,7 +8,7 @@ START_TEST(tests_sort_usual)
     {
         int *num = NULL;
         node_t *head;
-        head = listread(f, num);
+        head = listread(f, &num);
         node_t *new = sort(head, comparator_int);
         node_t *cur = new;
         ck_assert_int_eq(*((int *)cur->data), 2);
@@ -37,7 +37,7 @@ START_TEST(tests_sort_one)
     {
         int *num = NULL;
         node_t *head;
-        head = listread(f, num);
+        head = listread(f, &num);
         node_t *new = sort(head, comparator_int);
         node_t *cur = new;
         ck_assert_int_eq(*((int *)cur->data), 1);
@@ -56,7 +56,7 @@ START_TEST(tests_sort_sort)
     {
         int *num = NULL;
         node_t *head;
-        head = listread(f, num);
+        head = listread(f, &num);
         node_t *new = sort(head, comparator_int);
         node_t *cur = new;
         ck_assert_int_eq(*((int *)cur->data), 1);
@@ -85,7 +85,7 @@ START_TEST(tests_sort_unsort)
     {
         int *num = NULL;
         node_t *head;
-        head = listread(f, num);
+        head = listread(f, &num);
         node_t *new = sort(head, comparator_int);
         node_t *cur = new;
         ck_assert_int_eq(*((int *)cur->data), 1);
@@ -107,7 +107,7 @@ START_TEST(tests_sort_unsort)
 END_TEST
 
 
-Suite* reverse_suite(void)
+Suite* sort_suite(void)
 {
     Suite *s;
     TCase *tc_pos;

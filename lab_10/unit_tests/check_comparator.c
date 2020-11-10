@@ -100,7 +100,7 @@ START_TEST(tests_compar_double_bigger)
 END_TEST
 
 
-Suite* compare_suite(void)
+Suite* comparator_suite(void)
 {
     Suite *s;
     TCase *tc_pos;

@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/app.exe",
-            "args": ["app.exe", "f.txt"],
+            "args": ["func_tests/pos_02_in.txt", "out.txt", "i", "2", "4"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

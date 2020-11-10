@@ -6,16 +6,10 @@ int main(void)
 
     SRunner *runner;
 
-    runner = srunner_create(avarage_suite());
-    srunner_add_suite(runner, compare_suite());
-    srunner_add_suite(runner, file_size_suite());
-    srunner_add_suite(runner, key_suite());
-    srunner_add_suite(runner, key_count_suite());
-    srunner_add_suite(runner, mysort_suite());
-    srunner_add_suite(runner, parsing_array_suite());
-    srunner_add_suite(runner, parsing_key_array_suite());
-    //srunner_add_suite(runner, swap_suite());
-
+    runner = srunner_create(comparator_suite());
+    srunner_add_suite(runner, reverse_suite());
+    srunner_add_suite(runner, sort_suite());
+    srunner_add_suite(runner, my_check_key_suite());
 
     srunner_run_all(runner, CK_VERBOSE);
     no_failed = srunner_ntests_failed(runner);

@@ -8,7 +8,7 @@ START_TEST(tests_reverse1)
     if (f)
     {
         node_t *head;
-        head = listread(f, num);
+        head = listread(f, &num);
         node_t *new = reverse(head);
         node_t *cur = new;
         ck_assert_int_eq(*((int *)cur->data), 7);
@@ -32,7 +32,7 @@ START_TEST(tests_reverse1)
 }
 END_TEST
 
-START_TEST(tests_reverse2)
+START_TEST(tests_reverse_one)
 {
     FILE *f;
     int *num = NULL;
@@ -40,7 +40,7 @@ START_TEST(tests_reverse2)
     if (f)
     {
         node_t *head;
-        head = listread(f, num);
+        head = listread(f, &num);
         node_t *new = reverse(head);
         node_t *cur = new;
         ck_assert_int_eq(*((int *)cur->data), 1);
@@ -60,7 +60,7 @@ Suite* reverse_suite(void)
 
     tc_pos = tcase_create("positives");
     tcase_add_test(tc_pos, tests_reverse1);
-    tcase_add_test(tc_pos, tests_reverse2);
+    tcase_add_test(tc_pos, tests_reverse_one);
     suite_add_tcase(s, tc_pos);
 
     return s;

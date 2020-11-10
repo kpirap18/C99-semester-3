@@ -18,14 +18,12 @@
 #define OPENERROR   -6
 #define INVALID_ARG -7
 
-Suite* avarage_suite(void);
-Suite* compare_suite(void);
-Suite* file_size_suite(void);
-Suite* key_suite(void);
-Suite* key_count_suite(void);
-Suite* mysort_suite(void);
-Suite* parsing_array_suite(void);
-Suite* parsing_key_array_suite(void);
-Suite* swap_suite(void);
+Suite* comparator_suite(void);
+
+Suite* reverse_suite(void);
+
+Suite* sort_suite(void);
+
+Suite* my_check_key_suite(void);
 
 #endif // CHECK_MAIN_H
