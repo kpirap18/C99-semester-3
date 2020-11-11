@@ -5,4 +5,6 @@
 
 int my_check_key(char *key);
 
+int filelen(FILE *f);
+
 #endif // CHECK_H

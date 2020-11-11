@@ -40,7 +40,7 @@ START_TEST(tests_compar_char_less)
     int rc;
 
     rc = comparator_char(aa, bb);
-    ck_assert_int_eq(rc, -1);
+    ck_assert_int_eq(rc, -25);
 }
 END_TEST
 
@@ -62,7 +62,7 @@ START_TEST(tests_compar_char_bigger)
     int rc;
 
     rc = comparator_char(aa, bb);
-    ck_assert_int_eq(rc, 1);
+    ck_assert_int_eq(rc, 21);
 }
 END_TEST
 

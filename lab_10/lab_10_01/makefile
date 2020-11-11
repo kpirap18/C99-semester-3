@@ -8,8 +8,10 @@ CFLAGS = -pedantic -Wall -Werror -Wextra -Wvla -Wfloat-equal -Wfloat-conversion 
 
 
 OBJS = $(OUT)list.o $(OUT)task_01.o $(OUT)task_02.o $(OUT)task_03.o $(OUT)my_check.o
-OBJS_UNIT = $(OUT)check_main.o  $(OUT)check_task_01.o  \
-$(OUT)check_task_02.o $(OUT)check_task_03.o $(OUT)check_my_check.o
+OBJS_UNIT = $(OUT)check_main.o  $(OUT)check_pop.o $(OUT)check_comparator.o \
+$(OUT)check_task_02.o $(OUT)check_task_03.o $(OUT)check_my_check.o \
+$(OUT)check_find.o $(OUT)check_filelen.o $(OUT)check_insert.o \
+$(OUT)check_listcreatenode.o $(OUT)check_listread.o $(OUT)check_listaddbegin.o
 
 debug : CFLAGS += -g3
 debug : app.exe

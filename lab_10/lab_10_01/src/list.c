@@ -26,17 +26,6 @@ node_t* listaddbegin(node_t* head, node_t* node)
     return node;
 }
 
-static int filelen(FILE *f)
-{
-    int num, len = 0;
-    rewind(f);
-    while(fscanf(f, "%d", &num) == 1)
-    {
-        len++;
-    }
-
-    return len;
-}
 node_t* listread(FILE *f, int **num1)
 {
     node_t *head = NULL, *node = NULL;

@@ -22,8 +22,22 @@ Suite* comparator_suite(void);
 
 Suite* reverse_suite(void);
 
+Suite* pop_suite(void);
+
 Suite* sort_suite(void);
 
 Suite* my_check_key_suite(void);
+
+Suite* find_suite(void);
+
+Suite* filelen_suite(void);
+
+Suite* insert_suite(void);
+
+Suite* listcreatenode_suite(void);
+
+Suite* listread_suite(void);
+
+Suite* listaddbegin_suite(void);
 
 #endif // CHECK_MAIN_H

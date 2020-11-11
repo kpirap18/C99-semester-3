@@ -33,7 +33,7 @@ Suite* my_check_key_suite(void)
     TCase *tc_pos;
     TCase *tc_neg;
 
-    s = suite_create("me_check_key");
+    s = suite_create("my_check_key");
 
     tc_neg = tcase_create("negatives");
     tcase_add_test(tc_neg, tests_error);
