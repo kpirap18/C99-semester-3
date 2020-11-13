@@ -200,3 +200,20 @@ int main()
     }
     return OK;
 }
+
+int filelen(FILE *f)
+{
+    int num, len = 0;
+    
+    fseek(f , 0L, SEEK_SET); 
+    
+    while (fscanf(f, "%d", &num) == 1)
+    {
+        len++;
+    }
+    
+    fseek(f , 0L, SEEK_SET); 
+    
+    return len;
+}
+
