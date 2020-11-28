@@ -2,31 +2,31 @@
 
 START_TEST(tests_listcreatenode1)
 {
-    int w = 2;
-    node_t *node = listcreatenode((void *)&w);
-    ck_assert_int_eq(*((int *)node->data), 2);
-    ck_assert_ptr_ne(node, NULL);
-    listfree(node);
+    node_t *data = listcreatenode("I’m Bored", "Michael Ian Black");
+    book_r d = { "I’m Bored", "Michael Ian Black" };
+    int rc = comparator_book(&d, data->data);
+    ck_assert_int_eq(rc, 0);
+    listonefree(data);
 }
 END_TEST
 
 START_TEST(tests_listcreatenode2)
 {
-    int w = 355;
-    node_t *node = listcreatenode((void *)&w);
-    ck_assert_int_eq(*((int *)node->data), 355);
-    ck_assert_ptr_ne(node, NULL);
-    listfree(node);
+    node_t *data = listcreatenode("I", "Mi");
+    book_r d = { "I", "Mi" };
+    int rc = comparator_book(&d, data->data);
+    ck_assert_int_eq(rc, 0);
+    listonefree(data);
 }
 END_TEST
 
 START_TEST(tests_listcreatenode3)
 {
-    int w = 9;
-    node_t *node = listcreatenode((void *)&w);
-    ck_assert_int_eq(*((int *)node->data), 9);
-    ck_assert_ptr_ne(node, NULL);
-    listfree(node);
+    node_t *data = listcreatenode("I.", "Mi. ");
+    book_r d = { "I.", "Mi. " };
+    int rc = comparator_book(&d, data->data);
+    ck_assert_int_eq(rc, 0);
+    listonefree(data);
 }
 END_TEST
 

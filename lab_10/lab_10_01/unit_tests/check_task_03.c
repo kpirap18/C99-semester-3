@@ -3,28 +3,17 @@
 START_TEST(tests_sort_usual)
 {
     FILE *f;
-    f = fopen("../func_tests/f1.txt", "r");
+    f = fopen("func_tests/pos_in_01.txt", "r");
     if (f)
     {
-        int *num = NULL;
         node_t *head;
-        head = listread(f, &num);
-        node_t *new = sort(head, comparator_int);
-        node_t *cur = new;
-        ck_assert_int_eq(*((int *)cur->data), 2);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 4);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 5);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 6);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 7);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 8);
+        head = listread(f);
+        head = sort(head, comparator_book);
+        book_r data = { "A Christmas Carol", "Charles Dickens" };
+        int rc = comparator_book(head->data, &data);
+        ck_assert_int_eq(rc, 0);
         fclose(f);
         listfree(head);
-        free(num);
     }
 }
 END_TEST
@@ -32,18 +21,17 @@ END_TEST
 START_TEST(tests_sort_one)
 {
     FILE *f;
-    f = fopen("../func_tests/f2.txt", "r");
+    f = fopen("func_tests/pos_in_02.txt", "r");
     if (f)
     {
-        int *num = NULL;
         node_t *head;
-        head = listread(f, &num);
-        node_t *new = sort(head, comparator_int);
-        node_t *cur = new;
-        ck_assert_int_eq(*((int *)cur->data), 1);
+        head = listread(f);
+        head = sort(head, comparator_book);
+        book_r data = { "I’m Bored", "Michael Ian Black" };
+        int rc = comparator_book(head->data, &data);
+        ck_assert_int_eq(rc, 0);
         fclose(f);
         listfree(head);
-        free(num);
     }
 }
 END_TEST
@@ -51,28 +39,17 @@ END_TEST
 START_TEST(tests_sort_sort)
 {
     FILE *f;
-    f = fopen("../func_tests/f3.txt", "r");
+    f = fopen("func_tests/f3.txt", "r");
     if (f)
     {
-        int *num = NULL;
         node_t *head;
-        head = listread(f, &num);
-        node_t *new = sort(head, comparator_int);
-        node_t *cur = new;
-        ck_assert_int_eq(*((int *)cur->data), 1);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 2);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 3);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 4);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 5);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 6);
+        head = listread(f);
+        head = sort(head, comparator_book);
+        book_r data = { "A Christmas Carol", "Charles Dickens" };
+        int rc = comparator_book(head->data, &data);
+        ck_assert_int_eq(rc, 0);
         fclose(f);
         listfree(head);
-        free(num);
     }
 }
 END_TEST
@@ -80,28 +57,17 @@ END_TEST
 START_TEST(tests_sort_unsort)
 {
     FILE *f;
-    f = fopen("../func_tests/f4.txt", "r");
+    f = fopen("func_tests/f1.txt", "r");
     if (f)
     {
-        int *num = NULL;
         node_t *head;
-        head = listread(f, &num);
-        node_t *new = sort(head, comparator_int);
-        node_t *cur = new;
-        ck_assert_int_eq(*((int *)cur->data), 1);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 2);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 3);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 4);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 5);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 6);
+        head = listread(f);
+        head = sort(head, comparator_book);
+        book_r data = { "The Million Pound Bank", "Mark Twain" };
+        int rc = comparator_book(head->data, &data);
+        ck_assert_int_eq(rc, 0);
         fclose(f);
         listfree(head);
-        free(num);
     }
 }
 END_TEST

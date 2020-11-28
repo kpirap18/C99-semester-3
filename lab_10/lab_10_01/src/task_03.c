@@ -3,7 +3,7 @@
 
 #define EPS 1e-6
 
-node_t* sort(node_t *head, int (*comparator)(const void *, const void *))
+node_t *sort(node_t *head, int (*comparator)(const void *, const void *))
 {
     if (!head || !head->next)
     {
@@ -12,7 +12,7 @@ node_t* sort(node_t *head, int (*comparator)(const void *, const void *))
 
     if (!comparator)
     {
-        return 0;
+        return NULL;
     }
 
     node_t *a = NULL;
@@ -29,7 +29,7 @@ node_t* sort(node_t *head, int (*comparator)(const void *, const void *))
     return new_head;
 }
 
-void front_back_split(node_t* head, node_t** back)
+void front_back_split(node_t *head, node_t **back)
 {
     if (!head || !back)
     {
@@ -48,9 +48,14 @@ void front_back_split(node_t* head, node_t** back)
     b->next = NULL;
 }
 
-node_t* sorted_merge(node_t** head_a, node_t** head_b, int (*comparator)(const void *, const void *))
+node_t *sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const void *, const void *))
 {
-    if (!comparator || !head_a || !head_b)
+    if (!head_a || !head_b)
+    {
+        return NULL;
+    }
+	
+    if (comparator == NULL)
     {
         return NULL;
     }
@@ -139,4 +144,20 @@ int comparator_double(const void *p, const void *q)
         return 1;
     else 
         return -1;
+}
+
+int comparator_book(const void *p, const void *q)
+{
+    book_r *p1 = (book_r *)p;
+    book_r *q1 = (book_r *)q;
+    if (strcmp(p1->name, q1->name) > 0)
+        return 1;
+    if (strcmp(p1->name, q1->name) < 0)
+        return -1;
+    if (strcmp(p1->author, q1->author) > 0)
+        return 1;
+    if (strcmp(p1->author, q1->author) < 0)
+        return -1;
+
+    return 0;
 }

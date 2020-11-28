@@ -3,31 +3,19 @@
 START_TEST(tests_listread)
 {
     FILE *f;
-    int *num= NULL;
-    f = fopen("../func_tests/pos_01_in.txt", "r");
+    f = fopen("func_tests/pos_in_01.txt", "r");
     if (f)
     {
         node_t *head;
-        head = listread(f, &num);
-        ck_assert_ptr_eq(head, NULL);
-        node_t* cur = head;
-        ck_assert_int_eq(*((int *)cur->data), 1);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 2);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 3);
-        cur = cur->next;
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 4);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 5);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 6);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 7);
+        head = listread(f);
+        node_t *cur = head->next;
+        book_r data = { "I’m Bored", "Michael Ian Black" };
+        int rc = comparator_book(head->data, &data);
+        ck_assert_int_eq(rc, 0);
+        book_r data1 = { "Michael Ian Black", "Click, Clack, Moo: Cows That Type" };
+        rc = comparator_book(cur->data, &data1);
         fclose(f);
         listfree(head);
-        free(num);
     }
 }
 END_TEST
@@ -35,18 +23,16 @@ END_TEST
 START_TEST(tests_listread_one)
 {
     FILE *f;
-    int *num = NULL;
-    f = fopen("../func_tests/pos_02_in.txt", "r");
+    f = fopen("func_tests/pos_in_02.txt", "r");
     if (f)
     {
         node_t *head;
-        head = listread(f, &num);
-        node_t* cur = head;
-        ck_assert_ptr_eq(head, NULL);
-        ck_assert_int_eq(*((int *)cur->data), 1);
+        head = listread(f);
+        book_r data = { "I’m Bored", "Michael Ian Black" };
+        int rc = comparator_book(head->data, &data);
+        ck_assert_int_eq(rc, 0);
         fclose(f);
         listfree(head);
-        free(num);
     }
 }
 END_TEST
@@ -54,16 +40,14 @@ END_TEST
 START_TEST(tests_listread_none)
 {
     FILE *f;
-    int *num = NULL;
-    f = fopen("../func_tests/neg_01_in.txt", "r");
+    f = fopen("func_tests/neg_in_01.txt", "r");
     if (f)
     {
         node_t *head;
-        head = listread(f, &num);
+        head = listread(f);
         ck_assert_ptr_eq(head, NULL);
         fclose(f);
         listfree(head);
-        free(num);
     }
 }
 END_TEST
@@ -72,12 +56,12 @@ START_TEST(tests_listread_uncorrect)
 {
     FILE *f;
     int *num = NULL;
-    f = fopen("../func_tests/neg_04_in.txt", "r");
+    f = fopen("func_tests/neg_in_03.txt", "r");
     if (f)
     {
         node_t *head;
-        head = listread(f, &num);
-        ck_assert_ptr_ne(head, NULL);
+        head = listread(f);
+        ck_assert_ptr_eq(head, NULL);
         fclose(f);
         listfree(head);
         free(num);

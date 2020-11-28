@@ -1,17 +1,18 @@
-#ifndef LIST_H
-#define LIST_H
+#ifndef _LIST_H_
+#define _LIST_H_
+
+#define _GNU_SOURCE
 
 #include "app.h"
-#include "my_check.h"
 
-node_t* listcreatenode(void* data);
+node_t *readdata(FILE *f);
 
-node_t* listaddbegin(node_t* head, node_t* node);
+node_t *listonefree(node_t *node);
 
-node_t* listread(FILE *f, int **num);
+void freebook(book_r *del);
 
-void listfree(node_t *head);
+node_t *listcreatenode(char *name, char *author);
 
-void listprint(FILE *f, node_t *head);
+node_t *listaddbegin(node_t *head, node_t *node);
 
-#endif // LIST_H
+#endif // _LIST_H_

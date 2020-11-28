@@ -3,33 +3,17 @@
 START_TEST(tests_listadd)
 {
     FILE *f;
-    int *num= NULL;
-    f = fopen("../func_tests/pos_01_in.txt", "r");
+    f = fopen("func_tests/pos_in_01.txt", "r");
     if (f)
     {
         node_t *head;
-        head = listread(f, &num);
-        ck_assert_ptr_eq(head, NULL);
-        node_t* cur = head;
-        int w = 9;
-        node_t *node = listcreatenode((void *)&w);
-        head = listaddbegin(head, node);
-        ck_assert_int_eq(*((int *)cur->data), 9);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 1);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 2);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 3);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 4);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 5);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 6);
+        head = listread(f);
+        node_t *data1 = listcreatenode("I", "M");
+        head = listaddbegin(head, data1);
+        int rc = comparator_book(head->data, data1->data);
+        ck_assert_int_eq(rc, 0);
         fclose(f);
         listfree(head);
-        free(num);
     }
 }
 END_TEST
@@ -37,45 +21,29 @@ END_TEST
 START_TEST(tests_listadd_one)
 {
     FILE *f;
-    int *num = NULL;
-    f = fopen("../func_tests/pos_02_in.txt", "r");
+    f = fopen("func_tests/pos_in_02.txt", "r");
     if (f)
     {
         node_t *head;
-        head = listread(f, &num);
-        int w = 9;
-        node_t *node = listcreatenode((void *)&w);
-        head = listaddbegin(head, node);
-        node_t* cur = head;
-        ck_assert_ptr_eq(head, NULL);
-        ck_assert_int_eq(*((int *)cur->data), 9);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 1);
+        head = listread(f);
+        node_t *data1 = listcreatenode("I", "M");
+        head = listaddbegin(head, data1);
+        int rc = comparator_book(head->data, data1->data);
+        ck_assert_int_eq(rc, 0);
         fclose(f);
         listfree(head);
-        free(num);
     }
 }
 END_TEST
 
 START_TEST(tests_listadd_none)
 {
-    FILE *f;
-    int *num = NULL;
-    f = fopen("../func_tests/neg_01_in.txt", "r");
-    if (f)
-    {
-        node_t *head;
-        head = listread(f, &num);
-        int w = 9;
-        node_t *node = listcreatenode((void *)&w);
-        head = listaddbegin(head, node);
-        ck_assert_ptr_ne(head, NULL);
-        ck_assert_int_eq(*((int *)head->data), 9);
-        fclose(f);
-        listfree(head);
-        free(num);
-    }
+    node_t *head = NULL;
+    node_t *data1 = listcreatenode("I", "M");
+    head = listaddbegin(head, data1);
+    int rc = comparator_book(head->data, data1->data);
+    ck_assert_int_eq(rc, 0);
+    listfree(head);
 }
 END_TEST
 

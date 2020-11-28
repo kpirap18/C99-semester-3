@@ -100,6 +100,42 @@ START_TEST(tests_compar_double_bigger)
 END_TEST
 
 
+START_TEST(tests_compar_book_less)
+{
+    book_r a = { "AAd", "www" };
+    book_r b = { "AAf", "www" };
+    book_r *aa = &a, *bb = &b;
+    int rc;
+
+    rc = comparator_book(aa, bb);
+    ck_assert_int_eq(rc, -1);
+}
+END_TEST
+
+START_TEST(tests_compar_book_null)
+{
+    book_r a = { "qqq", "www" };
+    book_r b = { "qqq", "ww1" };
+    book_r *aa = &a, *bb = &b;
+    int rc;
+
+    rc = comparator_book(aa, bb);
+    ck_assert_int_eq(rc, 1);
+}
+END_TEST
+
+START_TEST(tests_compar_book_bigger)
+{
+    book_r a = { "AAA", "qqq" };
+    book_r b = { "AAA", "qqq" };
+    book_r *aa = &a, *bb = &b;
+    int rc;
+
+    rc = comparator_book(aa, bb);
+    ck_assert_int_eq(rc, 0);
+}
+END_TEST
+
 Suite* comparator_suite(void)
 {
     Suite *s;
@@ -117,6 +153,9 @@ Suite* comparator_suite(void)
     tcase_add_test(tc_pos, tests_compar_double_less);
     tcase_add_test(tc_pos, tests_compar_double_null);
     tcase_add_test(tc_pos, tests_compar_double_bigger);
+    tcase_add_test(tc_pos, tests_compar_book_less);
+    tcase_add_test(tc_pos, tests_compar_book_null);
+    tcase_add_test(tc_pos, tests_compar_book_bigger);
     suite_add_tcase(s, tc_pos);
 
     return s;

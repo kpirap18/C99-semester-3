@@ -3,36 +3,22 @@
 START_TEST(tests_insert)
 {
     FILE *f;
-    int *num= NULL;
-    f = fopen("../func_tests/pos_01_in.txt", "r");
+    f = fopen("func_tests/pos_in_01.txt", "r");
     if (f)
     {
         node_t *head;
-        int p = 1;
-        int w = 2;
-        head = listread(f, &num);
-        node_t *before = find(head, &p, comparator_int);
-        node_t *node = listcreatenode((void *)&w);
-        insert(&head, node, before);
-        node_t* cur = head;
-        ck_assert_int_eq(*((int *)cur->data), 7);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 6);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 5);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 4);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 3);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 2);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 2);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 1);
+        head = listread(f);
+        node_t *data = listcreatenode("I’m Bored", "Michael Ian Black");
+        node_t *res = find(head, data->data, comparator_book);
+        int rc = comparator_book(res->data, data->data);
+        ck_assert_int_eq(rc, 0);
+        node_t *data1 = listcreatenode("I", "M");
+        insert(&head, data1, res);
+        rc = comparator_book(head->data, data1->data);
+        ck_assert_int_eq(rc, 0);
         fclose(f);
         listfree(head);
-        free(num);
+        listonefree(data);
     }
 }
 END_TEST
@@ -40,50 +26,35 @@ END_TEST
 START_TEST(tests_insert_one)
 {
     FILE *f;
-    int *num = NULL;
-    f = fopen("../func_tests/pos_02_in.txt", "r");
+    f = fopen("func_tests/pos_in_02.txt", "r");
     if (f)
     {
         node_t *head;
-        int p = 1;
-        int w = 2;
-        head = listread(f, &num);
-        node_t *before = find(head, &p, comparator_int);
-        node_t *node = listcreatenode((void *)&w);
-        insert(&head, node, before);
-        node_t* cur = head;
-        ck_assert_int_eq(*((int *)cur->data), 2);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 1);
+        head = listread(f);
+        node_t *data = listcreatenode("I’m Bored", "Michael Ian Black");
+        node_t *res = find(head, data->data, comparator_book);
+        int rc = comparator_book(res->data, data->data);
+        ck_assert_int_eq(rc, 0);
+        node_t *data1 = listcreatenode("I", "M");
+        insert(&head, data1, res);
+        rc = comparator_book(head->data, data1->data);
+        ck_assert_int_eq(rc, 0);
         fclose(f);
         listfree(head);
-        free(num);
+        listonefree(data);
     }
 }
 END_TEST
 
 START_TEST(tests_insert_none)
 {
-    FILE *f;
-    int *num = NULL;
-    f = fopen("../func_tests/pos_02_in.txt", "r");
-    if (f)
-    {
-        node_t *head;
-        int p = 5;
-        int w = 2;
-        head = listread(f, &num);
-        node_t *before = find(head, &p, comparator_int);
-        node_t *node = listcreatenode((void *)&w);
-        insert(&head, node, before);
-        node_t* cur = head;
-        ck_assert_int_eq(*((int *)cur->data), 1);
-        cur = cur->next;
-        ck_assert_int_eq(*((int *)cur->data), 2);
-        fclose(f);
-        listfree(head);
-        free(num);
-    }
+    node_t *head = NULL;
+    book_r data = { "I", "M" };
+    node_t *data1 = listcreatenode("I", "M");
+    insert(&head, data1, NULL);
+    int rc = comparator_book(head->data, &data);
+    ck_assert_int_eq(rc, 0);
+    listfree(head);
 }
 END_TEST
 
