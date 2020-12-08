@@ -1,0 +1,78 @@
+#include "check_main.h"
+
+typedef void (__cdecl *func_parsing_array)(FILE *, int *);
+
+static func_parsing_array parsing_array;
+
+START_TEST(tests_file_usual)
+{
+    FILE *f = fopen("unit_tests\\1.txt", "r");
+    int a[5];
+    int *pa = a;
+
+	if (f)
+	{
+		parsing_array(f, pa);
+		ck_assert_int_eq(*pa, 4);
+		ck_assert_int_eq(*(pa + 1), 7);
+		ck_assert_int_eq(*(pa + 2), -8);
+		ck_assert_int_eq(*(pa + 3), 5);
+		ck_assert_int_eq(*(pa + 4), 6);
+		fclose(f);
+	}
+}
+END_TEST
+
+START_TEST(tests_file_similar)
+{
+    FILE *f = fopen("unit_tests\\2.txt", "r");
+    int a[4];
+    int *pa = a;
+
+	if (f)
+	{
+		parsing_array(f, pa);
+		ck_assert_int_eq(*pa, 1);
+		ck_assert_int_eq(*(pa + 1), 1);
+		ck_assert_int_eq(*(pa + 2), 1);
+		ck_assert_int_eq(*(pa + 3), 1);
+		fclose(f);
+	}
+}
+END_TEST
+
+START_TEST(tests_file_one)
+{
+    FILE *f = fopen("unit_tests\\3.txt", "r");
+    int a[1];
+    int *pa = a;
+
+	if (f)
+	{
+		parsing_array(f, pa);
+		ck_assert_int_eq(*pa, 8);
+		fclose(f);
+	}
+}
+END_TEST
+
+
+Suite* parsing_array_suite(void)
+{
+	HMODULE hlib = LoadLibrary("libapp.dll");
+	parsing_array = (func_parsing_array)GetProcAddress(hlib, "parsing_array");
+	
+    Suite *s;
+    TCase *tc_pos;
+
+    s = suite_create("parsing_array");
+
+    tc_pos = tcase_create("positives");
+    tcase_add_test(tc_pos, tests_file_usual);
+    tcase_add_test(tc_pos, tests_file_similar);
+    tcase_add_test(tc_pos, tests_file_one);
+    suite_add_tcase(s, tc_pos);
+
+	FreeLibrary(hlib);
+    return s;
+}
