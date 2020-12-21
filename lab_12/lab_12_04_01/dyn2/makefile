@@ -9,7 +9,7 @@ SRC = ./src/
 UNIT = ./unit_tests/
 LIBSRC = ../lib/src/
 FLAGDLL = -D EXPORTS
-CFLAGS = -pedantic -Wall -Wextra -Wvla -Wfloat-equal -Wfloat-conversion -std=c99 #-Werror
+CFLAGS = -pedantic -Wall -Wvla -Wfloat-equal -Wfloat-conversion -std=c99 -Werror
 
 OBJS = $(LIBOUT)key.o $(LIBOUT)parsing.o $(LIBOUT)mysort.o
 
@@ -26,11 +26,14 @@ release : app.exe
 func_dm : CFLAGS += -ggdb
 func_dm : run_func_dm
 
+func: libapp.dll app.exe
+	./run_test.bat
+
 app.exe: libapp.dll $(OUT)app.o
-	$(CC) $(OUT)app.o -o $@
+	$(CC) $(CFLAGS) $(OUT)app.o -o $@
 	
 unit_tests.exe: libapp.dll $(OBJS_UNIT) 
-	$(CC) $^ -o $@ -lcheck #-lsubunit -lm -lpthread -lrt
+	$(CC) $(CFLAGS) $^ -o $@ -lcheck #-lsubunit -lm -lpthread -lrt
 
 %.dll : $(OBJS)
 	$(CC) -shared $^ -Wl,--subsystem,windows -o $@
@@ -39,7 +42,7 @@ $(OUT)check_%.o : $(UNIT)check_%.c
 	cd out && $(CC)  $(INC) -c ../$<
 
 $(OUT)app.o : $(SRC)app.c
-	cd out && $(CC) $(CFLAGS) $(INC) -c ../$< # не работает
+	cd out && $(CC) $(CFLAGS) $(INC) -c ../$< 
 	
 $(LIBOUT)%.o : $(LIBSRC)%.c
 	cd ../lib/out && $(CC) $(CFLAGS) $(FLAGDLL) $(LIBINC) -c ../$<

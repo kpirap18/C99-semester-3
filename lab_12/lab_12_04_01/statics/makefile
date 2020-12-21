@@ -26,6 +26,9 @@ release : app.exe
 func_dm : CFLAGS += -ggdb
 func_dm : run_func_dm
 
+func: libapp.a app.exe
+	./run_test.bat
+
 app.exe: libapp.a $(OUT)app.o
 	$(CC) $(OUT)app.o -L. -lapp -o $@
 	

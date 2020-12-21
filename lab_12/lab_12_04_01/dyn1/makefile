@@ -26,6 +26,9 @@ release : app.exe
 func_dm : CFLAGS += -ggdb
 func_dm : run_func_dm
 
+func: libapp.dll app.exe
+	./run_test.bat
+
 app.exe: libapp.dll $(OUT)app.o
 	$(CC) $(OUT)app.o -L. -lapp -o $@
 	
@@ -76,4 +79,4 @@ run_func_dm: libapp.dll app.exe
 	
 .PHONY : clean debug release
 clean :
-	$(RM) $(OUT)*.o *.exe *.dll $(LIBOUT)*.o
+	$(RM) $(UNITOUT)*.o *.exe *.dll $(LIBOUT)*.o

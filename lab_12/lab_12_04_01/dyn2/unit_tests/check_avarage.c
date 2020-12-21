@@ -86,6 +86,7 @@ Suite* avarage_suite(void)
     tcase_add_test(tc_pos, tests_all_neg);
     suite_add_tcase(s, tc_pos);
 
+    FreeLibrary(hlib);
     return s;
 }
 
