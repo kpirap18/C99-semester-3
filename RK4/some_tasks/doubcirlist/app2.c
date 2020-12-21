@@ -30,7 +30,7 @@ struct list_node* add_end(struct list_node *hlist, struct list_node *node)
         cur= cur->next;  
     
     cur->next = node;
-    node->prev= hlist;
+    node->prev= cur;
     node->next = NULL;
 
     return hlist;
@@ -39,7 +39,7 @@ struct list_node* add_end(struct list_node *hlist, struct list_node *node)
 struct list_node* add_front(struct list_node *hlist, struct list_node *node)
 {
     node->next = hlist;
-    node->prev= NULL;
+    hlist->prev = node;
     
     return node;
 }
@@ -159,6 +159,8 @@ void print_list(struct list_node *hlist)
 
 void print_list2(struct list_node *hlist)
 {
+    for (; hlist->next; hlist = hlist->next)
+        ;
     for (; hlist; hlist = hlist->prev)
         printf("%d ", hlist->num);
     printf("\n");
@@ -182,6 +184,7 @@ void front_back_split(node_t *head, node_t **back)
     }
 
     *back = b->next;
+    (*back)->prev = NULL;
     b->next = NULL;
 }
 
@@ -232,12 +235,14 @@ node_t *sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
         if (comparator(&(a->num), &(b->num)) < 0)
         {
             c->next = a;
+            c->next->prev = c;
             c = c->next;
             a = a->next;
         }
         else
         {
             c->next = b;
+            c->next->prev = c;
             c = c->next;
             b = b->next;
         }
@@ -246,6 +251,7 @@ node_t *sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
     while (a)
     {
         c->next = a;
+        c->next->prev = c;
         c = c->next;
         a = a->next;
     }
@@ -253,6 +259,7 @@ node_t *sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
     while (b)
     {
         c->next = b;
+        c->next->prev = c;
         c = c->next;
         b = b->next;
     }
@@ -297,7 +304,6 @@ node_t *sort(node_t *head, int (*comparator)(const void *, const void *))
 
 int main()
 {
-
     int b1 = 5;
     int b2 = 2;
     int b3 = 1;
@@ -357,259 +363,5 @@ int main()
 
     n1 = sort(n1, comparator_int);
     print_list(n1);
-
-    // n1 = del_by_value(n1, 1);
-    // //printf("\n hlist->num = %d \n", n1->num);
-    // if (n1)
-    // {
-    //     printf("\n List after deleting \n");
-    //     print_list(n1);
-    // }
-    // else
-    //     printf("\n List is empty\n");
-
-    // { // 1
-    //     int b1 = 1;
-    //     int b2 = 2;
-    //     int b3 = 3;
-    //     int b4 = 4;
-    //     int b5 = 5;
-
-    //     node_t *n1 = malloc(sizeof(node_t));
-    //     if (!n1)
-    //         return -1;
-    //     node_t *n2 = malloc(sizeof(node_t));
-    //     if (!n2)
-    //     {
-    //         free(n1);
-    //         return -1;
-    //     }
-    //     node_t *n3 = malloc(sizeof(node_t));
-    //     if (!n3)
-    //     {
-    //         free(n1);
-    //         free(n2);
-    //         return -1;
-    //     }
-    //     node_t *n4 = malloc(sizeof(node_t));
-    //     if (!n4)
-    //     {
-    //         free(n1);
-    //         free(n2);
-    //         free(n3);
-    //         return -1;
-    //     }
-    //     node_t *n5 = malloc(sizeof(node_t));
-    //     if (!n5)
-    //     {
-    //         free(n1);
-    //         free(n2);
-    //         free(n3);
-    //         free(n4);
-    //         return -1;
-    //     }
-    //     n1->num = b1;
-    //     n2->num = b2;
-    //     n3->num = b3;
-    //     n4->num = b4;
-    //     n5->num = b5;
-
-    //     n1->next = n2;
-    //     n2->next = n3;
-    //     n3->next = n4;
-    //     n4->next = n5;
-    //     n5->next = NULL;
-
-    //     n1->prev = NULL;
-    //     n2->prev = n1;
-    //     n3->prev = n2;
-    //     n4->prev = n3;
-    //     n5->prev = n4;
-
-    //     //print_list(n1);
-    //     n1 = del_by_value(n1, 1);
-    //     if (n1->num == b2)
-    //     {
-    //         printf("TEST 1 PASTED\n");
-    //     }
-    //     else
-    //     {
-    //         printf("TEST 1 FAILED\n");
-    //     }
-    //     //print_list(n1);
-    //     //print_list2(n5);
-    // }
-
-    // { // 2
-    //     int b1 = 1;
-    //     int b2 = 2;
-    //     int b3 = 3;
-    //     int b4 = 4;
-    //     int b5 = 5;
-
-    //     node_t *n1 = malloc(sizeof(node_t));
-    //     if (!n1)
-    //         return -1;
-    //     node_t *n2 = malloc(sizeof(node_t));
-    //     if (!n2)
-    //     {
-    //         free(n1);
-    //         return -1;
-    //     }
-    //     node_t *n3 = malloc(sizeof(node_t));
-    //     if (!n3)
-    //     {
-    //         free(n1);
-    //         free(n2);
-    //         return -1;
-    //     }
-    //     node_t *n4 = malloc(sizeof(node_t));
-    //     if (!n4)
-    //     {
-    //         free(n1);
-    //         free(n2);
-    //         free(n3);
-    //         return -1;
-    //     }
-    //     node_t *n5 = malloc(sizeof(node_t));
-    //     if (!n5)
-    //     {
-    //         free(n1);
-    //         free(n2);
-    //         free(n3);
-    //         free(n4);
-    //         return -1;
-    //     }
-    //     n1->num = b1;
-    //     n2->num = b2;
-    //     n3->num = b3;
-    //     n4->num = b4;
-    //     n5->num = b5;
-
-    //     n1->next = n2;
-    //     n2->next = n3;
-    //     n3->next = n4;
-    //     n4->next = n5;
-    //     n5->next = NULL;
-
-    //     n1->prev = NULL;
-    //     n2->prev = n1;
-    //     n3->prev = n2;
-    //     n4->prev = n3;
-    //     n5->prev = n4;
-
-    //     //print_list(n1);
-    //     n1 = del_by_value(n1, 2);
-    //     if (n1->next->num == b3)
-    //     {
-    //         printf("TEST 2 PASTED\n");
-    //     }
-    //     else
-    //     {
-    //         printf("TEST 2 FAILED\n");
-    //     }
-    //     //print_list(n1);
-    //     //print_list2(n5);
-    // }
-
-    // { // 3
-    //     int b1 = 1;
-
-
-    //     node_t *n1 = malloc(sizeof(node_t));
-    //     if (!n1)
-    //         return -1;
-
-    //     n1->num = b1;
-
-    //     n1->next = NULL;
-
-    //     n1->prev = NULL;
-
-    //     //print_list(n1);
-    //     n1 = del_by_value(n1, 1);
-    //     if (n1 == NULL)
-    //     {
-    //         printf("TEST 3 PASTED\n");
-    //     }
-    //     else
-    //     {
-    //         printf("TEST 3 FAILED\n");
-    //     }
-    //     //print_list(n1);
-    //     //print_list2(n5);
-    // }
-
-    // { // 4
-    //     int b1 = 1;
-    //     int b2 = 2;
-    //     int b3 = 3;
-    //     int b4 = 4;
-    //     int b5 = 5;
-
-    //     node_t *n1 = malloc(sizeof(node_t));
-    //     if (!n1)
-    //         return -1;
-    //     node_t *n2 = malloc(sizeof(node_t));
-    //     if (!n2)
-    //     {
-    //         free(n1);
-    //         return -1;
-    //     }
-    //     node_t *n3 = malloc(sizeof(node_t));
-    //     if (!n3)
-    //     {
-    //         free(n1);
-    //         free(n2);
-    //         return -1;
-    //     }
-    //     node_t *n4 = malloc(sizeof(node_t));
-    //     if (!n4)
-    //     {
-    //         free(n1);
-    //         free(n2);
-    //         free(n3);
-    //         return -1;
-    //     }
-    //     node_t *n5 = malloc(sizeof(node_t));
-    //     if (!n5)
-    //     {
-    //         free(n1);
-    //         free(n2);
-    //         free(n3);
-    //         free(n4);
-    //         return -1;
-    //     }
-    //     n1->num = b1;
-    //     n2->num = b2;
-    //     n3->num = b3;
-    //     n4->num = b4;
-    //     n5->num = b5;
-
-    //     n1->next = n2;
-    //     n2->next = n3;
-    //     n3->next = n4;
-    //     n4->next = n5;
-    //     n5->next = NULL;
-
-    //     n1->prev = NULL;
-    //     n2->prev = n1;
-    //     n3->prev = n2;
-    //     n4->prev = n3;
-    //     n5->prev = n4;
-
-    //     //print_list(n1);
-    //     n1 = del_by_value(n1, 5);
-    //     if (n4->next == NULL)
-    //     {
-    //         printf("TEST 4 PASTED\n");
-    //     }
-    //     else
-    //     {
-    //         printf("TEST 4 FAILED\n");
-    //     }
-    //     //print_list(n1);
-    //     //print_list2(n5);
-    // }
-
+    print_list2(n1);
 }
