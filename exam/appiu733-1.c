@@ -11,33 +11,6 @@ typedef struct node
     struct node *next;
 } node_t;
 
-int input_number(FILE *f, int *number);
-node_t *in_list(node_t *head, int number);
-node_t *create_node(int data);
-node_t *add_begin(node_t *head, node_t *node);
-void print_list(FILE *f, node_t *head);
-void free_list(node_t *head);
-
-int main()
-{
-    int rc = OK, number;
-    node_t *head = NULL;
-
-    rc = input_number(stdin, &number);
-    if (rc != OK)
-    {
-        printf("Input error\n");
-    }
-
-    head = in_list(head, number);
-
-    print_list(stdout, head);
-
-    free_list(head);
-
-    return rc;
-}
-
 int input_number(FILE *f, int *number)
 {
     int rc = OK;
@@ -53,21 +26,22 @@ int input_number(FILE *f, int *number)
     return OK;
 }
 
-node_t *create_node(int data)
+int create_node(node_t **elem, int data)
 {
-    node_t *elem = malloc(sizeof(node_t));
+    int rc = OK;
+    *elem = malloc(sizeof(node_t));
 
-    if (elem)
+    if (*elem)
     {
-        elem->data = data;
-        elem->next = NULL;
+        (*elem)->data = data;
+        (*elem)->next = NULL;
     }
     else
     {
-        return NULL;
+        rc = MEMORYERR;
     }
 
-    return elem;
+    return rc;
 }
 
 node_t *add_begin(node_t *head, node_t *node)
@@ -76,29 +50,39 @@ node_t *add_begin(node_t *head, node_t *node)
     return node;
 }
 
-node_t *in_list(node_t *head, int number)
+int in_list(node_t **head, int number)
 {
-    int data;
+    int data, rc = OK;
     node_t *elem = NULL;
 
     if (number < 0)
     {
         number *= -1;
     }
+    
     if (number == 0)
     {
-        elem = create_node(number);
-        add_begin(head, elem);
+        rc = create_node(elem, number);
+        if (rc == OK)
+        {
+            add_begin(*head, elem);
+        }
     }
+
     while (number > 0)
     {
         data = number % 10;
-        elem = create_node(data);
-        add_begin(head, elem);
-        number /= 10;
+        rc = create_node(&elem, data);
+        if (rc == OK)
+        {
+            *head = add_begin(*head, elem);
+            number /= 10;
+        }
+        else
+            break;
     }
 
-    return head;
+    return rc;
 }
 
 void print_list(FILE *f, node_t *head)
@@ -123,3 +107,25 @@ void free_list(node_t *head)
         free(next);
     }
 }
+
+int main()
+{
+    int rc = OK, number;
+    node_t *head = NULL;
+
+    rc = input_number(stdin, &number);
+    if (rc != OK)
+    {
+        return INPUTERR;
+    }
+
+    head = in_list(head, number);
+
+    print_list(stdout, head);
+
+    free_list(head);
+
+    return rc;
+}
+
+
