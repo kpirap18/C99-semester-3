@@ -1,6 +1,6 @@
 /*
 c C99
-
+*/
 
 #include <assert.h>
 #include <stdio.h>
@@ -130,7 +130,7 @@ int main(void)
 
     return 0;
 }
-*/
+
 
 /*
 до C99
