@@ -114,11 +114,12 @@ void print_list(FILE *f, node_t *head)
 
 void free_list(node_t *head)
 {
-    node_t *cur = head;
+    node_t *next = NULL;
 
-    for ( ; head; head = cur)
+    while (head)
     {
-        cur = head->next;
-        free(head);
+        next = head;
+        head = head->next;
+        free(next);
     }
 }
